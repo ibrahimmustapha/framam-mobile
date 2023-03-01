@@ -1,17 +1,10 @@
-import {
-  SafeAreaView,
-  Text,
-  View,
-  TextInput,
-  Modal,
-  Alert,
-} from "react-native";
+import { SafeAreaView, Text, View, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 const RewardScreen = () => {
   return (
-    <SafeAreaView style={{ flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Text style={{ marginHorizontal: 20, fontSize: 40, fontWeight: "800" }}>
         Directions
       </Text>
@@ -56,9 +49,11 @@ const RewardScreen = () => {
           style={{ width: "100%", height: "100%", borderRadius: 20 }}
           provider={PROVIDER_GOOGLE}
           showsUserLocation={true}
-          minZoomLevel={13}
+          minZoomLevel={10}
           region={{ latitude: 5.559642, longitude: -0.195583 }}
-        ></MapView>
+        >
+          <Marker coordinate={{ latitude: 5.559642, longitude: -0.195583 }} />
+        </MapView>
       </View>
     </SafeAreaView>
   );

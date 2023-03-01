@@ -15,12 +15,15 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    AsyncStorage.getItem("idToken").then((value) => {
-      console.log("here------------> " + value);
-      setIsAuthenticated(value);
-      setLoading(false);
-    });
-  }, [isAuthenticated]);
+    const userLogin = async () => {
+      await AsyncStorage.getItem("idToken").then((value) => {
+        console.log("here------------> " + value);
+        setIsAuthenticated(value);
+        setLoading(false);
+      });
+    };
+    userLogin();
+  }, []);
 
   if (loading === true) {
     return (
@@ -32,8 +35,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }}>
-        {!isAuthenticated ? (
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {isAuthenticated == undefined ? (
           <>
             <Stack.Screen
               name="WalkthroughScreen"
@@ -42,10 +45,10 @@ export default function App() {
             <Stack.Screen name="Login" component={Login} />
           </>
         ) : (
-            <Stack.Screen
-              name="BottomTabNavigation"
-              component={BottomTabNavigation}
-            />
+          <Stack.Screen
+            name="BottomTabNavigation"
+            component={BottomTabNavigation}
+          />
         )}
       </Stack.Navigator>
     </NavigationContainer>

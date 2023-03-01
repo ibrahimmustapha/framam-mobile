@@ -10,7 +10,7 @@ const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation = () => {
   return (
-    <NavigationContainer independent={true}>
+    // <NavigationContainer independent={true}>
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={{
@@ -95,7 +95,7 @@ const BottomTabNavigation = () => {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
   );
 };
 

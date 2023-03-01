@@ -52,7 +52,7 @@ const TipScreen = () => {
               key={item.id}
               style={{
                 flex: 1,
-                backgroundColor: "#E5E4E2",
+                backgroundColor: "#fff",
                 paddingHorizontal: 20,
                 marginVertical: 10,
                 flexDirection: "row",
@@ -64,7 +64,7 @@ const TipScreen = () => {
             >
               <Image
                 source={{ uri: item.icon }}
-                style={{ width: 80, height: 80 }}
+                style={{ width: 60, height: 60 }}
               />
               <View style={{ width: "80%" }}>
                 <Text

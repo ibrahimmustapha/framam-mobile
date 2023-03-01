@@ -38,7 +38,7 @@ const ProfileScreen = () => {
 
   const removeToken = async () => {
     const idToken = await AsyncStorage.removeItem("idToken");
-    if (idToken === null) {
+    if (!idToken) {
       console.log("idToken removed successfully: " + idToken);
     } else {
       console.log("idToken not found or removed");
@@ -63,7 +63,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#3B3C36" }}>
+    <SafeAreaView style={{ backgroundColor: "#3B3C36", flex: 1 }}>
       <ScrollView
         style={{
           backgroundColor: DefaultTheme.colors.background,

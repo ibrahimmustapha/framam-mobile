@@ -4,6 +4,7 @@ const Images = {
   image3: require("./rec3.png"),
   login: require("./login.png"),
   register: require("./register.png"),
+  modalrec: require("./modalrec.png"),
 };
 
 export default  Images;

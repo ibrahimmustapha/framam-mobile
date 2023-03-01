@@ -1,6 +1,9 @@
-import { Image, View, Text, ScrollView, FlatList } from "react-native";
+import { useState } from "react";
+import { Image, View, Text, FlatList, Pressable } from "react-native";
+import ModalScreen from "./ModalScreen";
 
 const WasteCatergories = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const categoriesList = [
     {
       id: 1,
@@ -38,8 +41,14 @@ const WasteCatergories = () => {
         "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/256/external-recycle-vegan-and-vegetarian-flaticons-lineal-color-flat-icons.png",
     },
   ];
+
+  const onModalClose = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <View>
+      <ModalScreen onClose={onModalClose} isVisible={isModalVisible} />
       <Text
         style={{
           fontSize: 20,
@@ -50,9 +59,10 @@ const WasteCatergories = () => {
       >
         Waste Categories
       </Text>
-        <FlatList
-          data={categoriesList}
-          renderItem={({ item: category }) => (
+      <FlatList
+        data={categoriesList}
+        renderItem={({ item: category }) => (
+          <Pressable onPress={() => setIsModalVisible(true)}>
             <View
               key={category.id}
               style={{
@@ -61,7 +71,7 @@ const WasteCatergories = () => {
                 paddingVertical: 20,
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#E5E4E2",
+                backgroundColor: "#fff",
                 marginHorizontal: 20,
                 borderRadius: 5,
               }}
@@ -74,12 +84,13 @@ const WasteCatergories = () => {
                 {category.title}
               </Text>
             </View>
-          )}
-          keyExtractor={(category) => category.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          snapToAlignment={"start"}
-        />
+          </Pressable>
+        )}
+        keyExtractor={(category) => category.id}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        snapToAlignment={"start"}
+      />
     </View>
   );
 };
