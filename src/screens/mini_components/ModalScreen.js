@@ -1,9 +1,17 @@
 import { DefaultTheme } from "@react-navigation/native";
-import { Modal, Pressable, StyleSheet, View, Text, Image } from "react-native";
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ScrollView,
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Images from "../../images";
 
-const ModalScreen = ({ isVisible, children, onClose }) => {
+const ModalScreen = ({ isVisible, children, onClose, title }) => {
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>
@@ -14,12 +22,19 @@ const ModalScreen = ({ isVisible, children, onClose }) => {
         </View>
         <View>
           <View
-            style={{ justifyContent: "center", alignItems: "center", marginVertical: 0 }}
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              marginBottom: 20,
+            }}
           >
-            <Image source={Images.modalrec} style={{ width: "90%", height: 300, resizeMode: "contain"}}/>
+            <Image
+              source={Images.modalrec}
+              style={{ width: "90%", height: 300, resizeMode: "contain" }}
+            />
           </View>
           <View style={styles.modalBodyContainer}>
-            <Text style={styles.title}>How to Recycle Plastic</Text>
+            <Text style={styles.title}>How to Recycle {title}</Text>
             {children}
           </View>
         </View>

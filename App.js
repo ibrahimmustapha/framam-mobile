@@ -36,7 +36,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {isAuthenticated == undefined ? (
+        {isAuthenticated == null ? (
           <>
             <Stack.Screen
               name="WalkthroughScreen"

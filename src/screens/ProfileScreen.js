@@ -8,6 +8,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  NativeModules,
 } from "react-native";
 import { InstagramLoader } from "react-native-easy-content-loader";
 import { ScrollView } from "react-native-gesture-handler";
@@ -37,7 +38,7 @@ const ProfileScreen = () => {
   }, []);
 
   const removeToken = async () => {
-    const idToken = await AsyncStorage.removeItem("idToken");
+    const idToken = await AsyncStorage.clear();
     if (!idToken) {
       console.log("idToken removed successfully: " + idToken);
     } else {
@@ -56,6 +57,7 @@ const ProfileScreen = () => {
       .then((res) => {
         console.log(res.data);
         removeToken();
+        setTimeout(()=> NativeModules.DevSettings.reload(), 5000);
       })
       .catch((err) => {
         console.log(err);
@@ -92,7 +94,8 @@ const ProfileScreen = () => {
                 style={{ width: 120, height: 120, borderRadius: 10 }}
               />
               <Text
-                style={{ fontWeight: "800", fontSize: 38, marginVertical: 5 }} numberOfLines={1}
+                style={{ fontWeight: "800", fontSize: 38, marginVertical: 5 }}
+                numberOfLines={1}
               >
                 {user.fullname?.firstname} {user.fullname?.lastname}
               </Text>

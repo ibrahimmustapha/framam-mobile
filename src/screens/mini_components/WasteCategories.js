@@ -1,54 +1,45 @@
 import { useState } from "react";
-import { Image, View, Text, FlatList, Pressable } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
+import categoriesList from "../../local_data/WasteCategoryData";
 import ModalScreen from "./ModalScreen";
 
 const WasteCatergories = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const categoriesList = [
-    {
-      id: 1,
-      title: "Plastic",
-      image:
-        "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/256/external-plastic-recycling-center-flaticons-lineal-color-flat-icons-2.png",
-    },
-    {
-      id: 2,
-      title: "Glass",
-      image: "https://img.icons8.com/cotton/256/water-glass.png",
-    },
-    {
-      id: 3,
-      title: "Paper",
-      image:
-        "https://img.icons8.com/external-beshi-color-kerismaker/256/external-Paper-Recycle-ecology-beshi-color-kerismaker.png",
-    },
-    {
-      id: 4,
-      title: "E-Waste",
-      image:
-        "https://img.icons8.com/external-filled-color-icons-papa-vector/256/external-Electronic-Waste-battery-recycling-filled-color-icons-papa-vector.png",
-    },
-    {
-      id: 5,
-      title: "Metal",
-      image:
-        "https://img.icons8.com/external-others-pike-picture/256/external-metals-license-certificate-others-pike-picture.png",
-    },
-    {
-      id: 6,
-      title: "Organic",
-      image:
-        "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/256/external-recycle-vegan-and-vegetarian-flaticons-lineal-color-flat-icons.png",
-    },
-  ];
+  const [showTitle, setShowTitle] = useState({});
 
   const onModalClose = () => {
     setIsModalVisible(false);
   };
 
+  const openModal = (item) => {
+    setShowTitle(item);
+    setIsModalVisible(true);
+  };
   return (
     <View>
-      <ModalScreen onClose={onModalClose} isVisible={isModalVisible} />
+      <ModalScreen
+        onClose={onModalClose}
+        isVisible={isModalVisible}
+        title={showTitle.title}
+      >
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View>
+            <Text style={styles.stepsStyle}>{showTitle.steps1}</Text>
+            <Text style={styles.stepsStyle}>{showTitle.steps2}</Text>
+            <Text style={styles.stepsStyle}>{showTitle.steps3}</Text>
+            <Text style={styles.stepsStyle}>{showTitle.steps4}</Text>
+            <Text style={styles.stepsStyle}>{showTitle.steps5}</Text>
+          </View>
+        </ScrollView>
+      </ModalScreen>
       <Text
         style={{
           fontSize: 20,
@@ -61,10 +52,13 @@ const WasteCatergories = () => {
       </Text>
       <FlatList
         data={categoriesList}
-        renderItem={({ item: category }) => (
-          <Pressable onPress={() => setIsModalVisible(true)}>
+        keyExtractor={(item) => item.id.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        snapToAlignment={"start"}
+        renderItem={({ item }) => (
+          <Pressable onPress={() => openModal(item)}>
             <View
-              key={category.id}
               style={{
                 marginRight: -5,
                 paddingHorizontal: 20,
@@ -77,22 +71,27 @@ const WasteCatergories = () => {
               }}
             >
               <Image
-                source={{ uri: category.image }}
+                source={{ uri: item.image }}
                 style={{ width: 100, height: 100, paddingBottom: 10 }}
               />
               <Text style={{ fontSize: 16, fontWeight: "500", color: "black" }}>
-                {category.title}
+                {item.title}
               </Text>
             </View>
           </Pressable>
         )}
-        keyExtractor={(category) => category.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        snapToAlignment={"start"}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  stepsStyle: {
+    marginVertical: 5,
+    fontSize: 16,
+    fontWeight: "400",
+    lineHeight: 22,
+  },
+});
 
 export default WasteCatergories;

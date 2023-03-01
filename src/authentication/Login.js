@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
+  NativeModules,
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import image from "../images/index";
@@ -54,7 +55,8 @@ const Login = ({ navigation }) => {
         setLoading(true);
         setIdToken(res.data.idToken);
         setUid(res.data.userId);
-        console.log(res.data);
+        console.log("data ---> " + res.data);
+        setTimeout(()=> NativeModules.DevSettings.reload(), 4000);
       })
       .catch((err) => {
         console.log("Something went wrong!" + err);
