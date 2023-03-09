@@ -13,7 +13,7 @@ import image from "../images/index";
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Login = ({ navigation }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
     width: "100%",
     marginVertical: 5,
     fontSize: 17,
+    borderRadius: 10
   },
   emailContainer: {
     flexDirection: "row",
@@ -143,6 +144,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     width: "100%",
     marginVertical: 10,
+    borderRadius: 10
   },
   loginBtnText: {
     fontSize: 17,

@@ -1,4 +1,4 @@
-import { FlatList, Image, Text, View } from "react-native";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 
 const TipScreen = () => {
   const tipsData = [
@@ -6,7 +6,7 @@ const TipScreen = () => {
       id: 1,
       title: "Lorem ipsum dolor sit amet",
       desc: "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-      icon: "https://img.icons8.com/stickers/256/dining-room.png",
+      icon: "https://cdn-icons-png.flaticon.com/512/4426/4426791.png",
     },
     {
       id: 2,
@@ -52,32 +52,34 @@ const TipScreen = () => {
               key={item.id}
               style={{
                 flex: 1,
-                backgroundColor: "#fff",
-                paddingHorizontal: 20,
+                backgroundColor: "#FFF",
+                paddingHorizontal: 7,
                 marginVertical: 10,
                 flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
                 padding: 20,
-                borderRadius: 10,
+                borderRadius: 10
               }}
             >
               <Image
-                source={{ uri: item.icon }}
-                style={{ width: 60, height: 60 }}
+                source={{ uri: "https://img.icons8.com/color/256/goal.png" }}
+                style={{ width: 50, height: 50 }}
               />
-              <View style={{ width: "80%" }}>
+              <View
+                style={{ width: "80%", paddingVertical: 4, paddingLeft: 8 }}
+              >
                 <Text
                   style={{
                     fontSize: 18,
                     fontWeight: "500",
                     color: "black",
-                    paddingVertical: 5,
+                    paddingBottom: 4,
                   }}
                 >
                   {item.title}
                 </Text>
-                <Text numberOfLines={1}>{item.desc}</Text>
+                <Text numberOfLines={1} style={{ color: "grey", fontSize: 14 }}>
+                  {item.desc}
+                </Text>
               </View>
             </View>
           )}

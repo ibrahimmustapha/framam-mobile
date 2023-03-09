@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DefaultTheme } from "@react-navigation/native";
 import axios from "axios";
+import { StatusBar } from "expo-status-bar";
 import { useState, useEffect } from "react";
 import {
   Image,
@@ -65,7 +66,8 @@ const ProfileScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#3B3C36", flex: 1 }}>
+    <View style={{ flex: 1 }}>
+      <StatusBar translucent backgroundColor="transparent" style="light"/>
       <ScrollView
         style={{
           backgroundColor: DefaultTheme.colors.background,
@@ -79,7 +81,7 @@ const ProfileScreen = () => {
         ) : (
           <View>
             <View
-              style={{ backgroundColor: "#3B3C36", width: "100%", height: 150 }}
+              style={{ backgroundColor: "#2b2d42", width: "100%", height: 200 }}
             ></View>
             <View
               style={{
@@ -91,7 +93,7 @@ const ProfileScreen = () => {
             >
               <Image
                 source={{ uri: user.image?.url }}
-                style={{ width: 120, height: 120, borderRadius: 10 }}
+                style={{ width: 120, height: 120, borderRadius: 10, borderWidth: 3, borderColor: DefaultTheme.colors.background }}
               />
               <Text
                 style={{ fontWeight: "800", fontSize: 38, marginVertical: 5 }}
@@ -202,7 +204,7 @@ const ProfileScreen = () => {
           </View>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

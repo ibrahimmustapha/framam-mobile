@@ -3,7 +3,7 @@ const categoriesList = [
       id: 1,
       title: "Plastic",
       image:
-        "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/256/external-plastic-recycling-center-flaticons-lineal-color-flat-icons-2.png",
+        "https://cdn-icons-png.flaticon.com/512/1039/1039778.png",
       steps1:
         "1. Collect plastic materials: Collect all plastic materials that are recyclable in your area, such as bottles, containers, and packaging.",
       steps2:
@@ -18,7 +18,7 @@ const categoriesList = [
     {
       id: 2,
       title: "Glass",
-      image: "https://img.icons8.com/cotton/256/water-glass.png",
+      image: "https://cdn-icons-png.flaticon.com/512/1039/1039781.png",
       steps1:
         "1. Rinse: Empty and rinse the glass container with water. Make sure all food particles or residue are removed.",
       steps2:
@@ -34,7 +34,7 @@ const categoriesList = [
       id: 3,
       title: "Paper",
       image:
-        "https://img.icons8.com/external-beshi-color-kerismaker/256/external-Paper-Recycle-ecology-beshi-color-kerismaker.png",
+        "https://cdn-icons-png.flaticon.com/512/1039/1039780.png",
       steps1:
         "1. Collect your paper waste - gather all your paper waste from around the house, including office paper, newspaper, magazines, and cardboard.",
       steps2:
@@ -50,7 +50,7 @@ const categoriesList = [
       id: 4,
       title: "E-Waste",
       image:
-        "https://img.icons8.com/external-filled-color-icons-papa-vector/256/external-Electronic-Waste-battery-recycling-filled-color-icons-papa-vector.png",
+        "https://cdn-icons-png.flaticon.com/512/1039/1039783.png",
 
       steps1:
         "1. Identify the e-waste you want to recycle: Look for any old or broken electronic devices such as cell phones, computers, printers, TVs, etc. that you no longer need or use.",
@@ -67,7 +67,7 @@ const categoriesList = [
       id: 5,
       title: "Metal",
       image:
-        "https://img.icons8.com/external-others-pike-picture/256/external-metals-license-certificate-others-pike-picture.png",
+        "https://cdn-icons-png.flaticon.com/512/1039/1039782.png",
       steps1:
         "1. Collect the metal items: Gather all the metal items you want to recycle from around your home, such as aluminum cans, steel pans, and old appliances.",
       steps2:
@@ -83,7 +83,7 @@ const categoriesList = [
       id: 6,
       title: "Organic",
       image:
-        "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/256/external-recycle-vegan-and-vegetarian-flaticons-lineal-color-flat-icons.png",
+        "https://cdn-icons-png.flaticon.com/512/1039/1039775.png",
       steps1:
         "1. Collect organic waste: Collect all the organic waste from your home in a separate container. For example vegetable and fruit peels etc.",
       steps2:

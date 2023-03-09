@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import Swiper from "react-native-swiper";
 import Images from "../images";
 
@@ -29,12 +29,10 @@ export default function WalkthroughScreen({ navigation }) {
   ];
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <Swiper
         paginationStyle={{
-          position: "absolute",
-          bottom: 0,
-          paddingBottom: 30,
+          marginTop: 0
         }}
         activeDotColor="#fc7be0"
         activeDotStyle={{ width: 20, height: 8 }}
@@ -68,11 +66,11 @@ export default function WalkthroughScreen({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity>
           <Text style={{ fontWeight: "500", fontSize: 17 }}>
-            Don't have an account? Sign Up
+            Don't have an account? <Text style={{ color: "purple" }}>Sign up</Text>
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -103,6 +101,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingBottom: 20,
     width: "90%",
+    marginTop: -10
   },
   detailStyle: {
     fontSize: 16,

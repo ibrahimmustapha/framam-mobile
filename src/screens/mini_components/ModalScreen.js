@@ -11,33 +11,38 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Images from "../../images";
 
-const ModalScreen = ({ isVisible, children, onClose, title }) => {
+const ModalScreen = ({ isVisible, children, onClose, title, imageUrl }) => {
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
-          <Pressable onPress={onClose}>
-            <Icon name="arrow-back" color="#000" size={30} />
+          <Pressable onPress={onClose} style={{ backgroundColor: "#a5a5a5", borderRadius: 50, padding: 2}}>
+            <Icon name="arrow-back" color="#000" size={26} />
           </Pressable>
         </View>
-        <View>
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: 20,
-            }}
-          >
-            <Image
-              source={Images.modalrec}
-              style={{ width: "90%", height: 300, resizeMode: "contain" }}
-            />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                marginBottom: 20,
+              }}
+            >
+              <Image
+                source={{ uri: imageUrl }}
+                style={{ width: "50%", height: 250, resizeMode: "contain" }}
+              />
+            </View>
+            <View style={styles.modalBodyContainer}>
+              <View style={styles.indicatorContainer}>
+                <View style={styles.indicator}></View>
+              </View>
+              <Text style={styles.title}>How to Recycle {title}</Text>
+              {children}
+            </View>
           </View>
-          <View style={styles.modalBodyContainer}>
-            <Text style={styles.title}>How to Recycle {title}</Text>
-            {children}
-          </View>
-        </View>
+        </ScrollView>
       </View>
     </Modal>
   );
@@ -47,17 +52,17 @@ const styles = StyleSheet.create({
   modalContent: {
     height: "100%",
     width: "100%",
-    backgroundColor: DefaultTheme.colors.background,
+    backgroundColor: "#001524",
     position: "absolute",
     bottom: 0,
   },
   modalBodyContainer: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#fff",
     paddingHorizontal: 20,
     height: "100%",
-    paddingTop: 30,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    marginBottom: 20,
   },
   titleContainer: {
     height: "16%",
@@ -66,9 +71,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
-    marginBottom: -50,
-  },
+    paddingHorizontal: 10,
+    marginBottom: -50 
+   },
   title: {
     color: "#000",
     fontSize: 30,
@@ -80,6 +85,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 50,
     paddingVertical: 20,
+  },
+  indicator: {
+    width: 150,
+    padding: 3,
+    backgroundColor: "lightgrey",
+    borderRadius: 10,
+  },
+  indicatorContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 15,
+    marginBottom: 15,
   },
 });
 

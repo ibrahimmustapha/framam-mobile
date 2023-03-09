@@ -29,6 +29,7 @@ const WasteCatergories = () => {
         onClose={onModalClose}
         isVisible={isModalVisible}
         title={showTitle.title}
+        imageUrl={showTitle.image}
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           <View>
@@ -61,22 +62,19 @@ const WasteCatergories = () => {
             <View
               style={{
                 marginRight: -5,
-                paddingHorizontal: 20,
+                paddingHorizontal: 25,
                 paddingVertical: 20,
                 justifyContent: "center",
                 alignItems: "center",
                 backgroundColor: "#fff",
                 marginHorizontal: 20,
-                borderRadius: 5,
+                borderRadius: 10
               }}
             >
               <Image
                 source={{ uri: item.image }}
-                style={{ width: 100, height: 100, paddingBottom: 10 }}
+                style={{ width: 90, height: 90, paddingBottom: 10 }}
               />
-              <Text style={{ fontSize: 16, fontWeight: "500", color: "black" }}>
-                {item.title}
-              </Text>
             </View>
           </Pressable>
         )}
@@ -91,6 +89,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "400",
     lineHeight: 22,
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
 });
 

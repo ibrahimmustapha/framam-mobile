@@ -5,10 +5,9 @@ import WalkthroughScreen from "./src/screens/WalkthroughScreen";
 import BottomTabNavigation from "./src/navigation/BottomTabNavigation";
 import Login from "./src/authentication/Login";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
 
 const Stack = createNativeStackNavigator();
-const AuthContext = createContext();
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState("");
@@ -54,11 +53,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    paddingTop: 70,
-  },
-});
