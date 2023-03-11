@@ -7,13 +7,15 @@ import {
   Image,
   ActivityIndicator,
   NativeModules,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import image from "../images/index";
 import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -56,7 +58,7 @@ const Login = () => {
         setIdToken(res.data.idToken);
         setUid(res.data.userId);
         console.log("data ---> " + res.data);
-        setTimeout(()=> NativeModules.DevSettings.reload(), 4000);
+        setTimeout(() => NativeModules.DevSettings.reload(), 4000);
       })
       .catch((err) => {
         console.log("Something went wrong!" + err);
@@ -64,67 +66,71 @@ const Login = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={image.login} style={styles.imageStyle} />
-      <Text style={styles.loginTitle}>Login</Text>
-      <View style={styles.authContainer}>
-        <Text style={{ fontSize: 17, fontWeight: "600" }}>Email</Text>
-        <TextInput
-          style={styles.emailStyle}
-          placeholder="example@mail.com"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-        />
-        <Text style={{ fontSize: 17, fontWeight: "600", marginTop: 7 }}>
-          Password
-        </Text>
-        <TextInput
-          style={styles.emailStyle}
-          placeholder="8 or more characters"
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          secureTextEntry
-        />
-        <TouchableOpacity style={styles.loginBtn} onPress={SignIn}>
-          <Text style={styles.loginBtnText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text
-            style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
-          >
-            Don't have an account?{" "}
-            <Text style={{ color: "purple" }}>Sign up</Text>
-          </Text>
-        </TouchableOpacity>
-      </View>
-      {loading && (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <ActivityIndicator size="large" color="#BF4F51" />
+    <ScrollView automaticallyAdjustKeyboardInsets={true} style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <Image source={image.login} style={styles.imageStyle} />
+        <Text style={styles.loginTitle}>Login</Text>
+        <View style={styles.authContainer}>
+          <Text style={{ fontSize: 15 }}>Email</Text>
+          <TextInput
+            style={styles.emailStyle}
+            placeholder="example@mail.com"
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+          />
+          <Text style={{ fontSize: 15, marginTop: 7 }}>Password</Text>
+          <TextInput
+            style={styles.emailStyle}
+            placeholder="8 or more characters"
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            secureTextEntry
+          />
+          <TouchableOpacity style={styles.loginBtn} onPress={SignIn}>
+            <Text style={styles.loginBtnText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+            <Text
+              style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
+            >
+              Don't have an account?{" "}
+              <Text style={{ color: "purple" }}>Sign up</Text>
+            </Text>
+          </TouchableOpacity>
         </View>
-      )}
-    </View>
+        {loading && (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ActivityIndicator size="large" color="#BF4F51" />
+          </View>
+        )}
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "white",
+    // flex: 1,
+    // backgroundColor: "white",
   },
   authContainer: {
     marginHorizontal: 25,
   },
   emailStyle: {
     borderColor: "grey",
-    backgroundColor: "#F2F3F4",
+    backgroundColor: "#E5E4E2",
     paddingVertical: 15,
     padding: 10,
     width: "100%",
     marginVertical: 5,
     fontSize: 17,
-    borderRadius: 10
+    borderRadius: 10,
   },
   emailContainer: {
     flexDirection: "row",
@@ -144,7 +150,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     width: "100%",
     marginVertical: 10,
-    borderRadius: 10
+    borderRadius: 10,
   },
   loginBtnText: {
     fontSize: 17,
@@ -153,7 +159,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     width: "100%",
-    height: "50%",
+    height: "70%",
     resizeMode: "contain",
   },
 });

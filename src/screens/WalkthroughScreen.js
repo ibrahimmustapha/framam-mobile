@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import Swiper from "react-native-swiper";
 import Images from "../images";
 
@@ -14,7 +21,7 @@ export default function WalkthroughScreen({ navigation }) {
     },
     {
       id: 2,
-      title: "Redeem Points from Recycling ", 
+      title: "Redeem Points from Recycling ",
       details:
         "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.",
       image: Images.image2,
@@ -32,7 +39,7 @@ export default function WalkthroughScreen({ navigation }) {
     <SafeAreaView style={{ flex: 1 }}>
       <Swiper
         paginationStyle={{
-          marginTop: 0
+          marginTop: 0,
         }}
         activeDotColor="#fc7be0"
         activeDotStyle={{ width: 20, height: 8 }}
@@ -56,17 +63,16 @@ export default function WalkthroughScreen({ navigation }) {
       >
         <TouchableOpacity
           style={styles.buttonStyle}
-          onPress={() =>
-            navigation.navigate("Login")
-          }
+          onPress={() => navigation.navigate("Login")}
         >
           <Text style={{ fontWeight: "700", fontSize: 17, color: "white" }}>
             Get Started
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
           <Text style={{ fontWeight: "500", fontSize: 17 }}>
-            Don't have an account? <Text style={{ color: "purple" }}>Sign up</Text>
+            Don't have an account?{" "}
+            <Text style={{ color: "purple" }}>Sign up</Text>
           </Text>
         </TouchableOpacity>
       </View>
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingBottom: 20,
     width: "90%",
-    marginTop: -10
+    marginTop: -10,
   },
   detailStyle: {
     fontSize: 16,

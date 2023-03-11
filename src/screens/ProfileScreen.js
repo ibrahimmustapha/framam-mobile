@@ -58,7 +58,7 @@ const ProfileScreen = () => {
       .then((res) => {
         console.log(res.data);
         removeToken();
-        setTimeout(()=> NativeModules.DevSettings.reload(), 5000);
+        setTimeout(() => NativeModules.DevSettings.reload(), 5000);
       })
       .catch((err) => {
         console.log(err);
@@ -67,8 +67,9 @@ const ProfileScreen = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar translucent backgroundColor="transparent" style="light"/>
+      <StatusBar translucent backgroundColor="transparent" style="light" />
       <ScrollView
+        showsVerticalScrollIndicator={false}
         style={{
           backgroundColor: DefaultTheme.colors.background,
           height: "100%",
@@ -93,7 +94,13 @@ const ProfileScreen = () => {
             >
               <Image
                 source={{ uri: user.image?.url }}
-                style={{ width: 120, height: 120, borderRadius: 10, borderWidth: 3, borderColor: DefaultTheme.colors.background }}
+                style={{
+                  width: 120,
+                  height: 120,
+                  borderRadius: 10,
+                  borderWidth: 3,
+                  borderColor: DefaultTheme.colors.background,
+                }}
               />
               <Text
                 style={{ fontWeight: "800", fontSize: 38, marginVertical: 5 }}
@@ -109,7 +116,7 @@ const ProfileScreen = () => {
                     marginBottom: 10,
                     fontWeight: "400",
                     color: "grey",
-                    marginHorizontal: 5,
+                    marginHorizontal: 10,
                   }}
                 >
                   {user.email}
@@ -123,7 +130,7 @@ const ProfileScreen = () => {
                     marginBottom: 10,
                     fontWeight: "400",
                     color: "grey",
-                    marginHorizontal: 5,
+                    marginHorizontal: 10,
                   }}
                 >
                   {user.bio?.job}
@@ -137,10 +144,24 @@ const ProfileScreen = () => {
                     marginBottom: 10,
                     fontWeight: "400",
                     color: "grey",
-                    marginHorizontal: 5,
+                    marginHorizontal: 10,
                   }}
                 >
                   {user.bio?.age} years
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <Icon name="cake" size={20} color="grey" />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    marginBottom: 10,
+                    fontWeight: "400",
+                    color: "grey",
+                    marginHorizontal: 10,
+                  }}
+                >
+                  {user.dob?.day} / {user.dob?.month} / {user.dob?.year}
                 </Text>
               </View>
               <View style={{ flexDirection: "row" }}>
@@ -151,10 +172,24 @@ const ProfileScreen = () => {
                     marginBottom: 10,
                     fontWeight: "400",
                     color: "grey",
-                    marginHorizontal: 5,
+                    marginHorizontal: 10,
                   }}
                 >
                   {user.points} points
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row" }}>
+                <Icon name="phone" size={20} color="grey" />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    marginBottom: 10,
+                    fontWeight: "400",
+                    color: "grey",
+                    marginHorizontal: 10,
+                  }}
+                >
+                  {user.phonenumber}
                 </Text>
               </View>
               <View style={{ flexDirection: "row" }}>
@@ -165,7 +200,7 @@ const ProfileScreen = () => {
                     marginBottom: 10,
                     fontWeight: "400",
                     color: "grey",
-                    marginHorizontal: 5,
+                    marginHorizontal: 10,
                   }}
                 >
                   {user.bio?.address}
@@ -179,7 +214,7 @@ const ProfileScreen = () => {
                     marginBottom: 20,
                     fontWeight: "400",
                     color: "grey",
-                    marginHorizontal: 5,
+                    marginHorizontal: 10
                   }}
                 >
                   {user.bio?.about}
@@ -190,7 +225,7 @@ const ProfileScreen = () => {
                   backgroundColor: "#B3446C",
                   justifyContent: "center",
                   alignItems: "center",
-                  padding: 15,
+                  padding: 15, borderRadius: 15
                 }}
                 onPress={Logout}
               >

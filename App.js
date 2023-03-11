@@ -6,6 +6,7 @@ import BottomTabNavigation from "./src/navigation/BottomTabNavigation";
 import Login from "./src/authentication/Login";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState, useEffect } from "react";
+import SignUpForm from "./src/authentication/SignupForm";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,7 @@ export default function App() {
               component={WalkthroughScreen}
             />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="SignUp" component={SignUpForm} />
           </>
         ) : (
           <Stack.Screen
