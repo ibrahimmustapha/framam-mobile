@@ -34,7 +34,7 @@ const CommunityScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
       <View style={{ paddingVertical: 20 }}>
         <Text
           style={{
@@ -107,7 +107,7 @@ const CommunityScreen = () => {
                       <Text
                         style={{
                           fontWeight: "700",
-                          fontSize: 18,
+                          fontSize: 16,
                           paddingLeft: 3,
                         }}
                       >
@@ -115,9 +115,10 @@ const CommunityScreen = () => {
                       </Text>
                       <Text
                         style={{
-                          fontSize: 15,
+                          fontSize: 14,
                           paddingVertical: 3,
                           color: "grey",
+                          paddingLeft: 5
                         }}
                       >
                         {user.bio?.address}

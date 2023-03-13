@@ -115,7 +115,7 @@ const SignUpForm = () => {
     const formData = new FormData();
     formData.append("photo", {
       uri: image,
-      type: "multipart/form-data",
+      type: "image/jpeg",
       name: firstname + "_" + lastname,
     });
 
@@ -176,7 +176,7 @@ const SignUpForm = () => {
           <Text>Password</Text>
           <TextInput
             style={styles.inputStyle}
-            secureTextEntry="true"
+            secureTextEntry={true} 
             placeholder="8 or more characters eg. xxxxxxxx"
             onChangeText={(text) => setPassword(text)}
           />
@@ -192,25 +192,25 @@ const SignUpForm = () => {
             <TextInput
               style={styles.dobStyle}
               placeholder="DD"
-              keyboardType="numeric"
+              keyboardType={"numeric"}
               onChangeText={(text) => setDay(text)}
             />
             <TextInput
               style={styles.dobStyle}
               placeholder="MM"
-              keyboardType="numeric"
+              keyboardType={"numeric"}
               onChangeText={(text) => setMonth(text)}
             />
             <TextInput
               style={styles.dobStyle}
               placeholder="YYYY"
-              keyboardType="numeric"
+              keyboardType={"numeric"}
               onChangeText={(text) => setYear(text)}
             />
           </View>
           <Text>Phone Number</Text>
           <TextInput
-            keyboardType="numeric"
+            keyboardType={"numeric"}
             style={styles.inputStyle}
             placeholder="eg. 0547xxxxxx"
             onChangeText={(text) => setPhoneNumber(text)}

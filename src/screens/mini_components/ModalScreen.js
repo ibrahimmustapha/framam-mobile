@@ -16,7 +16,7 @@ const ModalScreen = ({ isVisible, children, onClose, title, imageUrl }) => {
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
-          <Pressable onPress={onClose} style={{ backgroundColor: "#a5a5a5", borderRadius: 50, padding: 2}}>
+          <Pressable onPress={onClose} style={{ backgroundColor: "#eee", borderRadius: 50, padding: 2}}>
             <Icon name="arrow-back" color="#000" size={26} />
           </Pressable>
         </View>
@@ -30,7 +30,7 @@ const ModalScreen = ({ isVisible, children, onClose, title, imageUrl }) => {
               }}
             >
               <Image
-                source={{ uri: imageUrl }}
+                source={{ url: imageUrl }}
                 style={{ width: "50%", height: 250, resizeMode: "contain" }}
               />
             </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   modalContent: {
     height: "100%",
     width: "100%",
-    backgroundColor: "#001524",
+    backgroundColor: "#000",
     position: "absolute",
     bottom: 0,
   },

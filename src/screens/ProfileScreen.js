@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DefaultTheme } from "@react-navigation/native";
 import axios from "axios";
 import { StatusBar } from "expo-status-bar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Image,
   SafeAreaView,
@@ -10,6 +10,7 @@ import {
   Text,
   TouchableOpacity,
   NativeModules,
+  RefreshControl,
 } from "react-native";
 import { InstagramLoader } from "react-native-easy-content-loader";
 import { ScrollView } from "react-native-gesture-handler";
@@ -18,9 +19,10 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 const ProfileScreen = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    AsyncStorage.getItem("userId").then((uid) => {
+  const getUser = async () => {
+    await AsyncStorage.getItem("userId").then((uid) => {
       axios
         .get(`http://192.168.8.100:3000/api/v1/user/${uid}`, {
           headers: {
@@ -36,6 +38,10 @@ const ProfileScreen = () => {
           console.log(err);
         });
     });
+  };
+
+  useEffect(() => {
+    getUser();
   }, []);
 
   const removeToken = async () => {
@@ -65,11 +71,22 @@ const ProfileScreen = () => {
       });
   };
 
+  const refreshData = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      getUser();
+      setRefreshing(false);
+    }, 2000);
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
       <StatusBar translucent backgroundColor="transparent" style="light" />
       <ScrollView
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={refreshData} />
+        }
         style={{
           backgroundColor: DefaultTheme.colors.background,
           height: "100%",
@@ -97,12 +114,13 @@ const ProfileScreen = () => {
                 style={{
                   width: 120,
                   height: 120,
-                  borderRadius: 10,
-                  borderWidth: 3,
+                  borderRadius: 15,
+                  borderWidth: 5,
                   borderColor: DefaultTheme.colors.background,
                 }}
               />
               <Text
+                selectable={true}
                 style={{ fontWeight: "800", fontSize: 38, marginVertical: 5 }}
                 numberOfLines={1}
               >
@@ -111,6 +129,7 @@ const ProfileScreen = () => {
               <View style={{ flexDirection: "row" }}>
                 <Icon name="mail" size={20} color="grey" />
                 <Text
+                  selectable={true}
                   style={{
                     fontSize: 18,
                     marginBottom: 10,
@@ -134,20 +153,6 @@ const ProfileScreen = () => {
                   }}
                 >
                   {user.bio?.job}
-                </Text>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <Icon name="event" size={20} color="grey" />
-                <Text
-                  style={{
-                    fontSize: 18,
-                    marginBottom: 10,
-                    fontWeight: "400",
-                    color: "grey",
-                    marginHorizontal: 10,
-                  }}
-                >
-                  {user.bio?.age} years
                 </Text>
               </View>
               <View style={{ flexDirection: "row" }}>
@@ -214,7 +219,7 @@ const ProfileScreen = () => {
                     marginBottom: 20,
                     fontWeight: "400",
                     color: "grey",
-                    marginHorizontal: 10
+                    marginHorizontal: 10,
                   }}
                 >
                   {user.bio?.about}
@@ -225,7 +230,8 @@ const ProfileScreen = () => {
                   backgroundColor: "#B3446C",
                   justifyContent: "center",
                   alignItems: "center",
-                  padding: 15, borderRadius: 15
+                  padding: 15,
+                  borderRadius: 15,
                 }}
                 onPress={Logout}
               >

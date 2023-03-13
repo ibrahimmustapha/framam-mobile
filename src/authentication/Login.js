@@ -84,7 +84,7 @@ const Login = ({ navigation }) => {
             placeholder="8 or more characters"
             onChangeText={(text) => setPassword(text)}
             value={password}
-            secureTextEntry
+            secureTextEntry={true}
           />
           <TouchableOpacity style={styles.loginBtn} onPress={SignIn}>
             <Text style={styles.loginBtnText}>Login</Text>

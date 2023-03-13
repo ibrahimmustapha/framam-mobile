@@ -130,7 +130,7 @@ const HomeScreen = () => {
             <Text
               style={{ fontSize: 17, fontWeight: "600", marginVertical: 10 }}
             >
-              🎉Congratulations on +100
+              🎉Congratulations on +10
             </Text>
           ) : (
             <Text
@@ -177,7 +177,7 @@ const HomeScreen = () => {
                 width: "100%",
                 padding: 45,
                 flexDirection: "row",
-                backgroundColor: "#2E8B57",
+                backgroundColor: "#446A46",
                 borderRadius: 15,
                 justifyContent: "center",
                 alignItems: "center",
@@ -294,7 +294,7 @@ const HomeScreen = () => {
         size={"large"}
         placement="right"
         style={{ marginBottom: 20, marginRight: 20 }}
-        color="#2E8B57"
+        color="#446A46"
         onPress={() => openModal()}
         icon={<Icon name="plus" color="#fff" size={25} />}
       />
