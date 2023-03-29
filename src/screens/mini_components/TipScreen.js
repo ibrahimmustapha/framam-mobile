@@ -52,7 +52,7 @@ const TipScreen = () => {
               key={item.id}
               style={{
                 flex: 1,
-                backgroundColor: "#FFF",
+                backgroundColor: "#dee2e6",
                 paddingHorizontal: 7,
                 marginVertical: 10,
                 flexDirection: "row",
@@ -61,7 +61,7 @@ const TipScreen = () => {
               }}
             >
               <Image
-                source={{ uri: "https://img.icons8.com/color/256/goal.png" }}
+                source={{ uri: "https://img.icons8.com/color/256/keep-clean.png" }}
                 style={{ width: 50, height: 50 }}
               />
               <View
@@ -71,7 +71,7 @@ const TipScreen = () => {
                   style={{
                     fontSize: 18,
                     fontWeight: "500",
-                    color: "black",
+                    color: "#000",
                     paddingBottom: 4,
                   }}
                 >

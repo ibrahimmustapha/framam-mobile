@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import categoriesList from "../../local_data/WasteCategoryData";
-import ModalScreen from "./ModalScreen";
+import ModalScreen from "../modals/ModalScreen";
 
 const WasteCatergories = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -23,6 +23,7 @@ const WasteCatergories = () => {
     setShowTitle(item);
     setIsModalVisible(true);
   };
+
   return (
     <View>
       <ModalScreen
@@ -33,11 +34,26 @@ const WasteCatergories = () => {
       >
         <ScrollView showsVerticalScrollIndicator={false}>
           <View>
-            <Text style={styles.stepsStyle}>{showTitle.steps1}</Text>
-            <Text style={styles.stepsStyle}>{showTitle.steps2}</Text>
-            <Text style={styles.stepsStyle}>{showTitle.steps3}</Text>
-            <Text style={styles.stepsStyle}>{showTitle.steps4}</Text>
-            <Text style={styles.stepsStyle}>{showTitle.steps5}</Text>
+            <View style={styles.stepsStyle}>
+              <View style={styles.listCircle}></View>
+              <Text style={styles.stepText}>{showTitle.steps1}</Text>
+            </View>
+            <View style={styles.stepsStyle}>
+              <View style={styles.listCircle}></View>
+              <Text style={styles.stepText}>{showTitle.steps2}</Text>
+            </View>
+            <View style={styles.stepsStyle}>
+              <View style={styles.listCircle}></View>
+              <Text style={styles.stepText}>{showTitle.steps3}</Text>
+            </View>
+            <View style={styles.stepsStyle}>
+              <View style={styles.listCircle}></View>
+              <Text style={styles.stepText}>{showTitle.steps4}</Text>
+            </View>
+            <View style={styles.stepsStyle}>
+              <View style={styles.listCircle}></View>
+              <Text style={styles.stepText}>{showTitle.steps5}</Text>
+            </View>
           </View>
         </ScrollView>
       </ModalScreen>
@@ -66,9 +82,9 @@ const WasteCatergories = () => {
                 paddingVertical: 20,
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#fff",
+                backgroundColor: "#dee2e6",
                 marginHorizontal: 20,
-                borderRadius: 10
+                borderRadius: 10,
               }}
             >
               <Image
@@ -85,16 +101,28 @@ const WasteCatergories = () => {
 
 const styles = StyleSheet.create({
   stepsStyle: {
-    marginVertical: 5,
-    fontSize: 16,
+    marginVertical: 8,
     fontWeight: "400",
     lineHeight: 22,
+    flexDirection: "row",
+    paddingRight: 8
+  },
+  stepText: {
+    fontSize: 16,
+    marginTop: -5,
+    paddingLeft: 10
   },
   shadowProp: {
     shadowColor: "#171717",
     shadowOffset: { width: -2, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+  },
+  listCircle: {
+    backgroundColor: "purple",
+    width: 10,
+    height: 10,
+    borderRadius: 40
   },
 });
 

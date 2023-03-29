@@ -1,4 +1,5 @@
 import { DefaultTheme } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 import {
   Modal,
   Pressable,
@@ -7,6 +8,7 @@ import {
   Text,
   Image,
   ScrollView,
+  Platform,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Images from "../../images";
@@ -15,9 +17,13 @@ const ModalScreen = ({ isVisible, children, onClose, title, imageUrl }) => {
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>
+        <StatusBar translucent backgroundColor="#000" style="light" />
         <View style={styles.titleContainer}>
-          <Pressable onPress={onClose} style={{ backgroundColor: "#eee", borderRadius: 50, padding: 2}}>
-            <Icon name="arrow-back" color="#000" size={26} />
+          <Pressable
+            onPress={onClose}
+            style={{ backgroundColor: "#161a1d", borderRadius: 50, padding: 3 }}
+          >
+            <Icon name="arrow-back" color="#fff" size={26} />
           </Pressable>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -31,7 +37,7 @@ const ModalScreen = ({ isVisible, children, onClose, title, imageUrl }) => {
             >
               <Image
                 source={{ url: imageUrl }}
-                style={{ width: "50%", height: 250, resizeMode: "contain" }}
+                style={{ width: 180, height: 250, resizeMode: "contain" }}
               />
             </View>
             <View style={styles.modalBodyContainer}>
@@ -52,7 +58,7 @@ const styles = StyleSheet.create({
   modalContent: {
     height: "100%",
     width: "100%",
-    backgroundColor: "#000",
+    backgroundColor: "#212529",
     position: "absolute",
     bottom: 0,
   },
@@ -65,19 +71,21 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   titleContainer: {
-    height: "16%",
+    height: Platform.OS === "android" ? "9%" : "16%",
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    marginBottom: -50 
-   },
+    marginBottom: -50,
+  },
   title: {
     color: "#000",
     fontSize: 30,
     fontWeight: "700",
+    marginBottom: 4,
+    marginLeft: 20
   },
   pickerContainer: {
     flexDirection: "row",

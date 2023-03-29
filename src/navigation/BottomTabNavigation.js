@@ -1,15 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import RewardScreen from "../screens/HowToScreen";
 import CommunityScreen from "../screens/CommunityScreen";
 import DirectionScreen from "../screens/DirectionScreen";
-import HowToScreen from "../screens/HowToScreen";
-import { Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
+import MessageScreen from "../screens/MessageScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,6 +31,7 @@ const BottomTabNavigation = () => {
         tabBarShowLabel: true,
         tabBarLabelStyle: { color: "green" },
         tabBarActiveTintColor: "yellow",
+        tabBarHideOnKeyboard: true
       }}
     >
       <Tab.Screen
@@ -63,13 +61,13 @@ const BottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="How to"
-        component={HowToScreen}
+        name="Messages"
+        component={MessageScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <Icon
-              name="psychology"
+              name="chat"
               color={focused ? "#BF4F51" : "grey"}
               size={33}
             />

@@ -12,13 +12,15 @@ import {
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import image from "../images/index";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthenticatedUserContext } from "../../App";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { setUser } = useContext(AuthenticatedUserContext);
 
   const setIdToken = async (idToken) => {
     try {
@@ -58,7 +60,7 @@ const Login = ({ navigation }) => {
         setIdToken(res.data.idToken);
         setUid(res.data.userId);
         console.log("data ---> " + res.data);
-        setTimeout(() => NativeModules.DevSettings.reload(), 4000);
+        setTimeout(() => setUser(res.data.idToken), 3000);
       })
       .catch((err) => {
         console.log("Something went wrong!" + err);
@@ -66,10 +68,10 @@ const Login = ({ navigation }) => {
   };
 
   return (
-    <ScrollView automaticallyAdjustKeyboardInsets={true} style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <Image source={image.login} style={styles.imageStyle} />
-        <Text style={styles.loginTitle}>Login</Text>
+    <View style={styles.container}>
+      <Image source={image.login} style={styles.imageStyle} />
+      <Text style={styles.loginTitle}>Login</Text>
+      <ScrollView automaticallyAdjustKeyboardInsets={true}>
         <View style={styles.authContainer}>
           <Text style={{ fontSize: 15 }}>Email</Text>
           <TextInput
@@ -98,19 +100,19 @@ const Login = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
-        {loading && (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <ActivityIndicator size="large" color="#BF4F51" />
-          </View>
-        )}
-      </View>
-    </ScrollView>
+      </ScrollView>
+      {loading && (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ActivityIndicator size="large" color="#BF4F51" />
+        </View>
+      )}
+    </View>
   );
 };
 
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     width: "100%",
-    height: "70%",
+    height: "50%",
     resizeMode: "contain",
   },
 });

@@ -87,7 +87,7 @@ const SignUpForm = () => {
         setUid(res.data.userId);
         uploadUserPhoto();
         console.log("data ---> " + res.data);
-        setTimeout(() => NativeModules.DevSettings.reload(), 4000);
+        // setTimeout(() => NativeModules.DevSettings.reload(), 4000);
       })
       .catch((err) => {
         console.log("Something went wrong!" + err);

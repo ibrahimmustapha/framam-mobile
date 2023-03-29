@@ -2,24 +2,27 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { DefaultTheme } from "@react-navigation/native";
 import axios from "axios";
 import { StatusBar } from "expo-status-bar";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useContext } from "react";
 import {
   Image,
-  SafeAreaView,
   View,
   Text,
   TouchableOpacity,
   NativeModules,
   RefreshControl,
+  ActivityIndicator,
 } from "react-native";
 import { InstagramLoader } from "react-native-easy-content-loader";
 import { ScrollView } from "react-native-gesture-handler";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { AuthenticatedUserContext } from "../../App";
+import ImageTextContainer from "../ui/ImageTextContainer";
 
 const ProfileScreen = () => {
-  const [user, setUser] = useState({});
+  const [user, setUserr] = useState({});
   const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const { setUser } = useContext(AuthenticatedUserContext);
 
   const getUser = async () => {
     await AsyncStorage.getItem("userId").then((uid) => {
@@ -31,7 +34,7 @@ const ProfileScreen = () => {
           },
         })
         .then((res) => {
-          setUser(res.data);
+          setUserr(res.data);
           setLoading(false);
         })
         .catch((err) => {
@@ -62,9 +65,10 @@ const ProfileScreen = () => {
         },
       })
       .then((res) => {
+        setIsLoading(true);
         console.log(res.data);
         removeToken();
-        setTimeout(() => NativeModules.DevSettings.reload(), 5000);
+        setTimeout(() => setUser(null), 3000);
       })
       .catch((err) => {
         console.log(err);
@@ -99,7 +103,7 @@ const ProfileScreen = () => {
         ) : (
           <View>
             <View
-              style={{ backgroundColor: "#2b2d42", width: "100%", height: 200 }}
+              style={{ backgroundColor: "#3a5a40", width: "100%", height: 200 }}
             ></View>
             <View
               style={{
@@ -109,16 +113,37 @@ const ProfileScreen = () => {
                 marginVertical: -40,
               }}
             >
-              <Image
-                source={{ uri: user.image?.url }}
+              <View
                 style={{
-                  width: 120,
-                  height: 120,
-                  borderRadius: 15,
-                  borderWidth: 5,
-                  borderColor: DefaultTheme.colors.background,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                 }}
-              />
+              >
+                <Image
+                  source={{ uri: user.image?.url }}
+                  style={{
+                    width: 120,
+                    height: 120,
+                    borderRadius: 15,
+                    borderWidth: 5,
+                    borderColor: DefaultTheme.colors.background,
+                  }}
+                />
+                <TouchableOpacity style={{ paddingTop: 50 }}>
+                  <View
+                    style={{
+                      padding: 8,
+                      borderRadius: 7,
+                      backgroundColor: "#161a1d",
+                      borderWidth: 2,
+                    }}
+                  >
+                    <Text style={{ fontSize: 15, fontWeight: "500", color: "#fff" }}>
+                      Edit Profile
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
               <Text
                 selectable={true}
                 style={{ fontWeight: "800", fontSize: 38, marginVertical: 5 }}
@@ -126,105 +151,19 @@ const ProfileScreen = () => {
               >
                 {user.fullname?.firstname} {user.fullname?.lastname}
               </Text>
-              <View style={{ flexDirection: "row" }}>
-                <Icon name="mail" size={20} color="grey" />
-                <Text
-                  selectable={true}
-                  style={{
-                    fontSize: 18,
-                    marginBottom: 10,
-                    fontWeight: "400",
-                    color: "grey",
-                    marginHorizontal: 10,
-                  }}
-                >
-                  {user.email}
-                </Text>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <Icon name="work" size={20} color="grey" />
-                <Text
-                  style={{
-                    fontSize: 18,
-                    marginBottom: 10,
-                    fontWeight: "400",
-                    color: "grey",
-                    marginHorizontal: 10,
-                  }}
-                >
-                  {user.bio?.job}
-                </Text>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <Icon name="cake" size={20} color="grey" />
-                <Text
-                  style={{
-                    fontSize: 18,
-                    marginBottom: 10,
-                    fontWeight: "400",
-                    color: "grey",
-                    marginHorizontal: 10,
-                  }}
-                >
-                  {user.dob?.day} / {user.dob?.month} / {user.dob?.year}
-                </Text>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <Icon name="stars" size={20} color="grey" />
-                <Text
-                  style={{
-                    fontSize: 18,
-                    marginBottom: 10,
-                    fontWeight: "400",
-                    color: "grey",
-                    marginHorizontal: 10,
-                  }}
-                >
-                  {user.points} points
-                </Text>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <Icon name="phone" size={20} color="grey" />
-                <Text
-                  style={{
-                    fontSize: 18,
-                    marginBottom: 10,
-                    fontWeight: "400",
-                    color: "grey",
-                    marginHorizontal: 10,
-                  }}
-                >
-                  {user.phonenumber}
-                </Text>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <Icon name="location-on" size={20} color="grey" />
-                <Text
-                  style={{
-                    fontSize: 18,
-                    marginBottom: 10,
-                    fontWeight: "400",
-                    color: "grey",
-                    marginHorizontal: 10,
-                  }}
-                >
-                  {user.bio?.address}
-                </Text>
-              </View>
-              <View style={{ flexDirection: "row" }}>
-                <Icon name="notes" size={20} color="grey" />
-                <Text
-                  style={{
-                    fontSize: 18,
-                    marginBottom: 20,
-                    fontWeight: "400",
-                    color: "grey",
-                    marginHorizontal: 10,
-                  }}
-                >
-                  {user.bio?.about}
-                </Text>
-              </View>
+              <ImageTextContainer data={user.email} icon={"mail"} />
+              <ImageTextContainer data={user.bio?.job} icon={"work"} />
+              <ImageTextContainer
+                data={`${user.dob?.day} / ${user.dob?.month} / ${user.dob?.year}`}
+                icon={"cake"}
+              />
+              <ImageTextContainer data={`${user.points} points`} icon={"stars"} />
+              <ImageTextContainer
+                data={user.bio?.address}
+                icon={"location-on"}
+              />
+              <ImageTextContainer data={user.phonenumber} icon={"phone"} />
+              <ImageTextContainer data={user.bio?.about} icon={"notes"} />
               <TouchableOpacity
                 style={{
                   backgroundColor: "#B3446C",
@@ -232,6 +171,7 @@ const ProfileScreen = () => {
                   alignItems: "center",
                   padding: 15,
                   borderRadius: 15,
+                  marginTop: 15
                 }}
                 onPress={Logout}
               >
@@ -242,6 +182,17 @@ const ProfileScreen = () => {
                 </Text>
               </TouchableOpacity>
             </View>
+          </View>
+        )}
+        {isLoading && (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ActivityIndicator size="large" color="#BF4F51" />
           </View>
         )}
       </ScrollView>

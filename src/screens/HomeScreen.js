@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 import {
   Image,
+  Platform,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -13,9 +14,10 @@ import {
 } from "react-native";
 import { Divider, FAB } from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import RewardModal from "./mini_components/RewardModal";
+import RewardModal from "./modals/RewardModal";
 import TipScreen from "./mini_components/TipScreen";
 import WasteCatergories from "./mini_components/WasteCategories";
+import MostPointsScreen from "./mini_components/MostPointsScreen";
 
 const HomeScreen = () => {
   const [user, setUser] = useState({});
@@ -94,7 +96,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingVertical: 30 }}>
+    <SafeAreaView style={{ flex: 1, paddingVertical: 20, marginTop: Platform.OS === "android" ? 20 : 0 }}>
       <RewardModal onClose={onModalClose} isVisible={isModalVisible}>
         <View
           style={{ marginVertical: 10 }}
@@ -146,10 +148,10 @@ const HomeScreen = () => {
           )}
         </View>
       </RewardModal>
-      <View style={{}}>
+      <View>
         <View
           style={{
-            paddingVertical: 16,
+            paddingBottom: 10,
             flexDirection: "row",
             justifyContent: "space-between",
             marginHorizontal: 20,
@@ -175,13 +177,13 @@ const HomeScreen = () => {
             <View
               style={{
                 width: "100%",
-                padding: 45,
+                padding: 35,
                 flexDirection: "row",
-                backgroundColor: "#446A46",
+                backgroundColor: "#3a5a40",
                 borderRadius: 15,
                 justifyContent: "center",
                 alignItems: "center",
-                marginVertical: 10,
+                marginVertical: 10
               }}
             >
               <View>
@@ -200,7 +202,7 @@ const HomeScreen = () => {
                     marginVertical: 10,
                   }}
                 >
-                  330
+                  80
                 </Text>
                 <Text
                   style={{
@@ -221,7 +223,7 @@ const HomeScreen = () => {
               />
               <View>
                 <Icon
-                  name="trophy"
+                  name="star-circle"
                   size={30}
                   color={"#C0FF00"}
                   style={{ textAlign: "center" }}
@@ -286,6 +288,7 @@ const HomeScreen = () => {
               </View>
             </View>
           </View>
+          <MostPointsScreen />
           <WasteCatergories />
           <TipScreen />
         </ScrollView>
@@ -294,7 +297,7 @@ const HomeScreen = () => {
         size={"large"}
         placement="right"
         style={{ marginBottom: 20, marginRight: 20 }}
-        color="#446A46"
+        color="#3a5a40"
         onPress={() => openModal()}
         icon={<Icon name="plus" color="#fff" size={25} />}
       />
