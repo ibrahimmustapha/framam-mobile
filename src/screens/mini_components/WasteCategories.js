@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import categoriesList from "../../local_data/WasteCategoryData";
 import ModalScreen from "../modals/ModalScreen";
+import { DefaultTheme } from "@react-navigation/native";
 
 const WasteCatergories = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -60,7 +61,7 @@ const WasteCatergories = () => {
       <Text
         style={{
           fontSize: 20,
-          fontWeight: "500",
+          fontWeight: "600",
           paddingVertical: 15,
           marginHorizontal: 20,
         }}
@@ -76,16 +77,7 @@ const WasteCatergories = () => {
         renderItem={({ item }) => (
           <Pressable onPress={() => openModal(item)}>
             <View
-              style={{
-                marginRight: -5,
-                paddingHorizontal: 25,
-                paddingVertical: 20,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#dee2e6",
-                marginHorizontal: 20,
-                borderRadius: 10,
-              }}
+              style={styles.categoriesListContainer}
             >
               <Image
                 source={{ uri: item.image }}
@@ -100,17 +92,32 @@ const WasteCatergories = () => {
 };
 
 const styles = StyleSheet.create({
+  categoriesListContainer: {
+    marginRight: -5,
+    paddingHorizontal: 25,
+    paddingVertical: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    marginHorizontal: 20,
+    borderRadius: 10,
+    shadowColor: DefaultTheme.colors.background,
+    shadowOffset: { width: 3, height: 20 },
+    shadowOpacity: 0.8,
+    shadowRadius: 15,
+    elevation: 2,
+  },
   stepsStyle: {
     marginVertical: 8,
     fontWeight: "400",
     lineHeight: 22,
     flexDirection: "row",
-    paddingRight: 8
+    paddingRight: 8,
   },
   stepText: {
     fontSize: 16,
     marginTop: -5,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   shadowProp: {
     shadowColor: "#171717",
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
     backgroundColor: "purple",
     width: 10,
     height: 10,
-    borderRadius: 40
+    borderRadius: 40,
   },
 });
 

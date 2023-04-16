@@ -7,6 +7,9 @@ import Login from "./src/authentication/Login";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState, useEffect, createContext, useContext } from "react";
 import SignUpForm from "./src/authentication/SignupForm";
+import EditUserScreen from "./src/screens/mini_screens/EditUserScreen";
+import AllTipsScreen from "./src/screens/mini_screens/AllTipsScreen";
+import TipDetailScreen from "./src/screens/mini_screens/TipDetailScreen";
 
 const Stack = createNativeStackNavigator();
 export const AuthenticatedUserContext = createContext({});
@@ -27,6 +30,9 @@ function AuthenticatedUserStack() {
         name="BottomTabNavigation"
         component={BottomTabNavigation}
       />
+      <Stack.Screen name="EditUserScreen" component={EditUserScreen} />
+      <Stack.Screen name="AllTipsScreen" component={AllTipsScreen} />
+      <Stack.Screen name="TipDetailScreen" component={TipDetailScreen} />
     </Stack.Navigator>
   );
 }
@@ -72,11 +78,7 @@ function RootNavigator() {
 
   return (
     <NavigationContainer>
-      {user != null ? (
-        <AuthenticatedUserStack />
-      ) : (
-        <UnAuthenticatedUserStack />
-      )}
+      {user != null ? <AuthenticatedUserStack /> : <UnAuthenticatedUserStack />}
     </NavigationContainer>
   );
 }

@@ -9,9 +9,11 @@ import {
   Image,
   ScrollView,
   Platform,
+  TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Images from "../../images";
+import { GestureHandlerRefContext } from "@react-navigation/stack";
 
 const ModalScreen = ({ isVisible, children, onClose, title, imageUrl }) => {
   return (
@@ -19,12 +21,12 @@ const ModalScreen = ({ isVisible, children, onClose, title, imageUrl }) => {
       <View style={styles.modalContent}>
         <StatusBar translucent backgroundColor="#000" style="light" />
         <View style={styles.titleContainer}>
-          <Pressable
+          <TouchableOpacity
             onPress={onClose}
             style={{ backgroundColor: "#161a1d", borderRadius: 50, padding: 3 }}
           >
             <Icon name="arrow-back" color="#fff" size={26} />
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View>
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    marginBottom: -50,
+    marginBottom: Platform.OS === "ios" ? -50: 0,
   },
   title: {
     color: "#000",

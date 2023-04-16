@@ -1,32 +1,39 @@
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { DefaultTheme, useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const TipScreen = () => {
-  const tipsData = [
-    {
-      id: 1,
-      title: "Lorem ipsum dolor sit amet",
-      desc: "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-      icon: "https://cdn-icons-png.flaticon.com/512/4426/4426791.png",
-    },
-    {
-      id: 2,
-      title: "Lorem ipsum dolor sit amet",
-      desc: "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-      icon: "https://img.icons8.com/emoji/256/bowl-with-spoon-emoji.png",
-    },
-    {
-      id: 3,
-      title: "Lorem ipsum dolor sit amet",
-      desc: "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-      icon: "https://img.icons8.com/officel/256/litter-disposal.png",
-    },
-    {
-      id: 4,
-      title: "Lorem ipsum dolor sit amet",
-      desc: "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
-      icon: "https://img.icons8.com/fluency/256/full-recycle-bin.png",
-    },
-  ];
+  const [tips, setTips] = useState([]);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    axios
+      .get(`http://192.168.8.100:3000/api/v1/first-four-tips`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((response) => {
+        setTips(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleUserPress = (user) => {
+    navigation.navigate("TipDetailScreen", { user });
+  };
+
   return (
     <View style={{ marginHorizontal: 20 }}>
       <View
@@ -37,51 +44,67 @@ const TipScreen = () => {
           marginBottom: 5,
         }}
       >
-        <Text style={{ fontSize: 20, fontWeight: "500" }}>
+        <Text style={{ fontSize: 20, fontWeight: "600" }}>
           Eco-friendly tips
         </Text>
-        <Text style={{ fontSize: 17, fontWeight: "500", color: "green" }}>
-          See All
-        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("AllTipsScreen")}>
+          <Text style={{ fontSize: 17, fontWeight: "500", color: "green" }}>
+            See All
+          </Text>
+        </TouchableOpacity>
       </View>
-      <View style={{}}>
+      <View>
         <FlatList
-          data={tipsData}
+          data={tips}
           renderItem={({ item }) => (
-            <View
+            <TouchableOpacity
               key={item.id}
-              style={{
-                flex: 1,
-                backgroundColor: "#dee2e6",
-                paddingHorizontal: 7,
-                marginVertical: 10,
-                flexDirection: "row",
-                padding: 20,
-                borderRadius: 10
-              }}
+              onPress={() => handleUserPress(item)}
             >
-              <Image
-                source={{ uri: "https://img.icons8.com/color/256/keep-clean.png" }}
-                style={{ width: 50, height: 50 }}
-              />
               <View
-                style={{ width: "80%", paddingVertical: 4, paddingLeft: 8 }}
+                style={{
+                  flex: 1,
+                  backgroundColor: "#fff",
+                  paddingHorizontal: 7,
+                  marginVertical: 10,
+                  flexDirection: "row",
+                  padding: 20,
+                  borderRadius: 10,
+                  shadowColor: DefaultTheme.colors.background,
+                  shadowOffset: { width: 3, height: 20 },
+                  shadowOpacity: 0.8,
+                  shadowRadius: 15,
+                  elevation: 2
+                }}
               >
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: "500",
-                    color: "#000",
-                    paddingBottom: 4,
+                <Image
+                  source={{
+                    uri: "https://img.icons8.com/color/256/keep-clean.png",
                   }}
+                  style={{ width: 50, height: 50 }}
+                />
+                <View
+                  style={{ width: "80%", paddingVertical: 4, paddingLeft: 8 }}
                 >
-                  {item.title}
-                </Text>
-                <Text numberOfLines={1} style={{ color: "grey", fontSize: 14 }}>
-                  {item.desc}
-                </Text>
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "500",
+                      color: "#000",
+                      paddingBottom: 4,
+                    }}
+                  >
+                    {item.title}
+                  </Text>
+                  <Text
+                    numberOfLines={1}
+                    style={{ color: "grey", fontSize: 14 }}
+                  >
+                    {item.description}
+                  </Text>
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
           keyExtractor={(tips) => tips.id}
           showsVerticalScrollIndicator={false}

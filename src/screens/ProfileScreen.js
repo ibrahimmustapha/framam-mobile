@@ -17,7 +17,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { AuthenticatedUserContext } from "../../App";
 import ImageTextContainer from "../ui/ImageTextContainer";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   const [user, setUserr] = useState({});
   const [loading, setLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -122,14 +122,14 @@ const ProfileScreen = () => {
                 <Image
                   source={{ uri: user.image?.url }}
                   style={{
-                    width: 120,
+                    width: "37%",
                     height: 120,
                     borderRadius: 15,
-                    borderWidth: 5,
+                    borderWidth: 3,
                     borderColor: DefaultTheme.colors.background,
                   }}
                 />
-                <TouchableOpacity style={{ paddingTop: 50 }}>
+                <TouchableOpacity style={{ paddingTop: 50 }} onPress={() => navigation.navigate("EditUserScreen")}>
                   <View
                     style={{
                       padding: 8,

@@ -26,7 +26,7 @@ const MostPointsScreen = () => {
 
   return (
     <View style={{ marginHorizontal: 20, marginTop: 15 }}>
-      <Text style={{ fontSize: 20, fontWeight: "500"}}>
+      <Text style={{ fontSize: 20, fontWeight: "600", marginBottom: 3}}>
         Top recycler of the week
       </Text>
       <View

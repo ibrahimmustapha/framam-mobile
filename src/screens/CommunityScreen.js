@@ -132,7 +132,7 @@ const CommunityScreen = () => {
           ) : null}
         </View>
         {loading ? (
-          <View>
+          <View style={{ marginVertical: 20}}>
             <ContentLoader
               active
               avatar
@@ -165,7 +165,7 @@ const CommunityScreen = () => {
                   >
                     <Image
                       source={{ uri: user.image?.url }}
-                      style={{ width: 60, height: 60, borderRadius: 30 }}
+                      style={{ width: 60, height: 60, borderRadius: 5 }}
                     />
                     <View style={{ paddingTop: 4, paddingLeft: 10 }}>
                       <Text

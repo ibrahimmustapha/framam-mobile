@@ -19,7 +19,7 @@ import TipScreen from "./mini_components/TipScreen";
 import WasteCatergories from "./mini_components/WasteCategories";
 import MostPointsScreen from "./mini_components/MostPointsScreen";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [user, setUser] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [token, setToken] = useState("");
@@ -96,7 +96,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingVertical: 20, marginTop: Platform.OS === "android" ? 20 : 0 }}>
+    <SafeAreaView style={{ flex: 1, paddingVertical: 20 }}>
       <RewardModal onClose={onModalClose} isVisible={isModalVisible}>
         <View
           style={{ marginVertical: 10 }}
@@ -109,12 +109,12 @@ const HomeScreen = () => {
               backgroundColor: "#F2F3F4",
               padding: 13,
               fontSize: 16,
-              marginBottom: 10,
+              marginBottom: 10, borderRadius: 10
             }}
             placeholderTextColor="grey"
           />
           <TouchableOpacity
-            style={{ backgroundColor: "#BF4F51", padding: 13 }}
+            style={{ backgroundColor: "#BF4F51", padding: 13, borderRadius: 10 }}
             onPress={redeemPoints}
           >
             <Text

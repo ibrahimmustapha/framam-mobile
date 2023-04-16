@@ -1,5 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import CommunityScreen from "../screens/CommunityScreen";
@@ -7,6 +9,7 @@ import DirectionScreen from "../screens/DirectionScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import MessageScreen from "../screens/MessageScreen";
+import { Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,10 +30,8 @@ const BottomTabNavigation = () => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarStyle: { backgroundColor: "white" },
+        tabBarStyle: { backgroundColor: "#fff" },
         tabBarShowLabel: true,
-        tabBarLabelStyle: { color: "green" },
-        tabBarActiveTintColor: "yellow",
         tabBarHideOnKeyboard: true
       }}
     >
@@ -40,7 +41,10 @@ const BottomTabNavigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <Icon name="home" color={focused ? "#BF4F51" : "grey"} size={33} />
+            <MaterialCommunityIcons name="home-variant-outline" color={focused ? "#BF4F51" : "grey"} size={30} />
+          ),
+          tabBarLabel: ({ focused, color, size }) => (
+            <Text style={{color: focused ? '#BF4F51' : color}}>Home</Text>
           ),
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}
@@ -51,11 +55,14 @@ const BottomTabNavigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name="directions-car"
+            <MaterialCommunityIcons
+              name="map-marker-radius"
               color={focused ? "#BF4F51" : "grey"}
-              size={33}
+              size={30}
             />
+          ),
+          tabBarLabel: ({ focused, color, size }) => (
+            <Text style={{color: focused ? '#BF4F51' : color}}>Directions</Text>
           ),
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}
@@ -66,11 +73,14 @@ const BottomTabNavigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name="chat"
+            <Ionicons
+              name="md-chatbubble-ellipses-sharp"
               color={focused ? "#BF4F51" : "grey"}
-              size={33}
+              size={26}
             />
+          ),
+          tabBarLabel: ({ focused, color, size }) => (
+            <Text style={{color: focused ? '#BF4F51' : color}}>Chats</Text>
           ),
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}
@@ -81,11 +91,14 @@ const BottomTabNavigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name="groups"
+            <Ionicons
+              name="ios-people-circle-sharp"
               color={focused ? "#BF4F51" : "grey"}
               size={33}
             />
+          ),
+          tabBarLabel: ({ focused, color, size }) => (
+            <Text style={{color: focused ? '#BF4F51' : color}}>Community</Text>
           ),
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}
@@ -96,11 +109,14 @@ const BottomTabNavigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <Icon
-              name="person"
+            <Ionicons
+              name="ios-person"
               color={focused ? "#BF4F51" : "grey"}
-              size={33}
+              size={28}
             />
+          ),
+          tabBarLabel: ({ focused, color, size }) => (
+            <Text style={{color: focused ? '#BF4F51' : color}}>Me</Text>
           ),
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}

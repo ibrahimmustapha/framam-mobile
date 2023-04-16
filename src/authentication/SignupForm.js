@@ -12,10 +12,10 @@ import {
 import { TextInput } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as ImagePicker from "expo-image-picker";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
-import mime from "mime";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AuthenticatedUserContext } from "../../App";
 
 const SignUpForm = () => {
   const [email, setEmail] = useState("");
@@ -33,6 +33,8 @@ const SignUpForm = () => {
   const [image, setImage] = useState(
     "https://img.icons8.com/external-others-inmotus-design/256/external-Avatar-man-hair-avatars-others-inmotus-design-5.png"
   );
+  const { setUser } = useContext(AuthenticatedUserContext);
+
   const setIdToken = async (idToken) => {
     try {
       await AsyncStorage.setItem("idToken", idToken);
@@ -87,7 +89,7 @@ const SignUpForm = () => {
         setUid(res.data.userId);
         uploadUserPhoto();
         console.log("data ---> " + res.data);
-        // setTimeout(() => NativeModules.DevSettings.reload(), 4000);
+        setTimeout(() => setUser(res.data.idToken), 3000);
       })
       .catch((err) => {
         console.log("Something went wrong!" + err);
@@ -112,12 +114,12 @@ const SignUpForm = () => {
   // select image from photo library
   const uploadUserPhoto = async () => {
     // const newImageUri = "file:///" + image.split("file:/").join("");
-    const formData = new FormData();
-    formData.append("photo", {
-      uri: image,
-      type: "image/jpeg",
-      name: firstname + "_" + lastname,
-    });
+      const formData = new FormData();
+      formData.append("photo", {
+        uri: image,
+        type: "image/jpeg",
+        name: firstname + "_" + lastname,
+      });
 
     await axios
       .post("http://192.168.8.100:3000/api/v1/add_photo", formData, {
