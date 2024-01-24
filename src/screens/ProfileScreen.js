@@ -8,7 +8,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  NativeModules,
   RefreshControl,
   ActivityIndicator,
 } from "react-native";

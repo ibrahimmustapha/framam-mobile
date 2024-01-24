@@ -10,6 +10,7 @@ import SignUpForm from "./src/authentication/SignupForm";
 import EditUserScreen from "./src/screens/mini_screens/EditUserScreen";
 import AllTipsScreen from "./src/screens/mini_screens/AllTipsScreen";
 import TipDetailScreen from "./src/screens/mini_screens/TipDetailScreen";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 export const AuthenticatedUserContext = createContext({});
@@ -85,8 +86,10 @@ function RootNavigator() {
 
 export default function App() {
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <AuthenticatedUserProvider>
       <RootNavigator />
     </AuthenticatedUserProvider>
+    </GestureHandlerRootView>
   );
 }

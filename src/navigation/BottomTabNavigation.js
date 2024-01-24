@@ -41,7 +41,7 @@ const BottomTabNavigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
-            <MaterialCommunityIcons name="home-variant-outline" color={focused ? "#BF4F51" : "grey"} size={30} />
+            <MaterialCommunityIcons name="home-outline" color={focused ? "#BF4F51" : "grey"} size={30} />
           ),
           tabBarLabel: ({ focused, color, size }) => (
             <Text style={{color: focused ? '#BF4F51' : color}}>Home</Text>
@@ -56,7 +56,7 @@ const BottomTabNavigation = () => {
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialCommunityIcons
-              name="map-marker-radius"
+              name="compass-outline"
               color={focused ? "#BF4F51" : "grey"}
               size={30}
             />
@@ -74,7 +74,7 @@ const BottomTabNavigation = () => {
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name="md-chatbubble-ellipses-sharp"
+              name="chatbubble-ellipses-outline"
               color={focused ? "#BF4F51" : "grey"}
               size={26}
             />
@@ -92,7 +92,7 @@ const BottomTabNavigation = () => {
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name="ios-people-circle-sharp"
+              name="people-outline"
               color={focused ? "#BF4F51" : "grey"}
               size={33}
             />
@@ -110,7 +110,7 @@ const BottomTabNavigation = () => {
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name="ios-person"
+              name="person-outline"
               color={focused ? "#BF4F51" : "grey"}
               size={28}
             />
