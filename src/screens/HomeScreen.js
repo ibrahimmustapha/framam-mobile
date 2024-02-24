@@ -95,26 +95,37 @@ const HomeScreen = ({ navigation }) => {
     }, 2000);
   }, []);
 
+  const pointsConversion = (points) => {
+      return  points >= 1000 ? points / 1000 + "k" : points;
+  }
+
+  const recyclesConversion = (recycles) => {
+    return  recycles >= 1000 ? recycles / 1000 + "k" : recycles;
+}
+
   return (
     <SafeAreaView style={{ flex: 1, paddingVertical: 20 }}>
-      <RewardModal onClose={onModalClose} isVisible={isModalVisible}>
-        <View
-          style={{ marginVertical: 10 }}
-        >
+      {/* <RewardModal onClose={onModalClose} isVisible={isModalVisible}>
+        <View style={{ marginVertical: 10 }}>
           <TextInput
-            placeholder="Enter token"
+            placeholder="Enter task location"
             onChangeText={(text) => setToken(text)}
             style={{
               padding: 10,
               backgroundColor: "#F2F3F4",
               padding: 13,
               fontSize: 16,
-              marginBottom: 10, borderRadius: 10
+              marginBottom: 10,
+              borderRadius: 10,
             }}
             placeholderTextColor="grey"
           />
           <TouchableOpacity
-            style={{ backgroundColor: "#BF4F51", padding: 13, borderRadius: 10 }}
+            style={{
+              backgroundColor: "#BF4F51",
+              padding: 13,
+              borderRadius: 10,
+            }}
             onPress={redeemPoints}
           >
             <Text
@@ -147,7 +158,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           )}
         </View>
-      </RewardModal>
+      </RewardModal> */}
       <View>
         <View
           style={{
@@ -183,7 +194,7 @@ const HomeScreen = ({ navigation }) => {
                 borderRadius: 15,
                 justifyContent: "center",
                 alignItems: "center",
-                marginVertical: 10
+                marginVertical: 10,
               }}
             >
               <View>
@@ -237,7 +248,7 @@ const HomeScreen = ({ navigation }) => {
                     textAlign: "center",
                   }}
                 >
-                  {user.points}
+                  {pointsConversion(user.points)}
                 </Text>
                 <Text
                   style={{
@@ -273,7 +284,7 @@ const HomeScreen = ({ navigation }) => {
                     marginVertical: 10,
                   }}
                 >
-                  {user.recycles}
+                  {recyclesConversion(user.recycles)}
                 </Text>
                 <Text
                   style={{
@@ -293,14 +304,14 @@ const HomeScreen = ({ navigation }) => {
           <TipScreen />
         </ScrollView>
       </View>
-      <FAB
+      {/* <FAB
         size={"large"}
         placement="right"
         style={{ marginBottom: 20, marginRight: 20 }}
         color="#3a5a40"
         onPress={() => openModal()}
         icon={<Icon name="plus" color="#fff" size={25} />}
-      />
+      /> */}
     </SafeAreaView>
   );
 };

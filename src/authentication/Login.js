@@ -96,7 +96,7 @@ const Login = ({ navigation }) => {
               style={{ fontSize: 16, fontWeight: "500", textAlign: "center" }}
             >
               Don't have an account?{" "}
-              <Text style={{ color: "purple" }}>Sign up</Text>
+              <Text style={{ color: "#0B60B0" }}>Sign up</Text>
             </Text>
           </TouchableOpacity>
         </View>
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   loginBtn: {
-    backgroundColor: "#BF4F51",
+    backgroundColor: "#0B60B0",
     paddingHorizontal: 100,
     justifyContent: "center",
     alignItems: "center",

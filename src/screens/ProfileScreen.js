@@ -102,7 +102,7 @@ const ProfileScreen = ({ navigation }) => {
         ) : (
           <View>
             <View
-              style={{ backgroundColor: "#3a5a40", width: "100%", height: 200 }}
+              style={{ backgroundColor: "#0B60B0", width: "100%", height: 200 }}
             ></View>
             <View
               style={{

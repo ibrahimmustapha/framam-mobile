@@ -1,0 +1,36 @@
+{
+    "expo": {
+      "name": "YourAppName",
+      "slug": "your-app-slug",
+      "version": "1.0.0",
+      "orientation": "portrait",
+      "icon": "./path/to/your/app-icon.png",
+      "splash": {
+        "image": "./path/to/your/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff"
+      },
+      "updates": {
+        "fallbackToCacheTimeout": 0
+      },
+      "assetBundlePatterns": ["**/*"],
+      "ios": {
+        "supportsTablet": true
+      },
+      "android": {
+        "adaptiveIcon": {
+          "foregroundImage": "./path/to/your/adaptive-icon.png",
+          "backgroundColor": "#ffffff"
+        }
+      },
+      "web": {
+        "favicon": "./path/to/your/favicon.png"
+      },
+      "statusBar": {
+        "style": "dark",
+        "backgroundColor": "transparent",
+        "translucent": true
+      }
+    }
+  }
+  

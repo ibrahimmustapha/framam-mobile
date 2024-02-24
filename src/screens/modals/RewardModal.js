@@ -22,7 +22,7 @@ const RewardModal = ({ isVisible, onClose, children }) => {
             <View>
               <View style={styles.iconStyle}>
                 <Text style={{ fontSize: 18, fontWeight: "700" }}>
-                  🎉Redeem Reward
+                  🎉Add Task Here
                 </Text>
                 <TouchableOpacity onPress={onClose}>
                   <Icon name="close" color="#000" size={27} />
@@ -30,7 +30,7 @@ const RewardModal = ({ isVisible, onClose, children }) => {
               </View>
               <ScrollView automaticallyAdjustKeyboardInsets={true}>
                 {children}
-                <View>
+                {/* <View>
                   <Text
                     style={{
                       fontSize: 20,
@@ -60,7 +60,7 @@ const RewardModal = ({ isVisible, onClose, children }) => {
                       appropriate error message will be displayed.
                     </Text>
                   </View>
-                </View>
+                </View> */}
               </ScrollView>
             </View>
           </View>

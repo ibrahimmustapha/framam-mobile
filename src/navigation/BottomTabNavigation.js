@@ -8,7 +8,7 @@ import CommunityScreen from "../screens/CommunityScreen";
 import DirectionScreen from "../screens/DirectionScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import MessageScreen from "../screens/MessageScreen";
+import TasksScreen from "../screens/TasksScreen";
 import { Text } from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -68,19 +68,19 @@ const BottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Messages"
-        component={MessageScreen}
+        name="Tasks"
+        component={TasksScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons
-              name="chatbubble-ellipses-outline"
+              name="medkit-outline"
               color={focused ? "#BF4F51" : "grey"}
               size={26}
             />
           ),
           tabBarLabel: ({ focused, color, size }) => (
-            <Text style={{color: focused ? '#BF4F51' : color}}>Chats</Text>
+            <Text style={{color: focused ? '#BF4F51' : color}}>Tasks</Text>
           ),
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}

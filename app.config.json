@@ -41,6 +41,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "iosStatusBar": {
+      "backgroundColor": "#C2185B",
+      "translucent": false
+    },
     "extra": {
       "eas": {
         "projectId": "f7527440-a573-4623-a662-b7b113363ebc"

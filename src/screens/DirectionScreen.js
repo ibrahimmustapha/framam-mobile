@@ -52,9 +52,9 @@ const DirectionScreen = () => {
                 >
                   <Image
                     source={{
-                      uri: "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/256/external-garbage-truck-recycling-center-flaticons-lineal-color-flat-icons-2.png",
+                      uri: "https://img.icons8.com/?size=256&id=NuiM0K3RQiBQ&format=png",
                     }}
-                    style={{ width: 37, height: 37 }}
+                    style={{ width: 40, height: 40 }}
                   />
                   {selectedMarker && selectedMarker.name === marker.name && (
                     <Callout>
