@@ -49,7 +49,7 @@ const BottomTabNavigation = () => {
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Directions"
         component={DirectionScreen}
         options={{
@@ -66,7 +66,7 @@ const BottomTabNavigation = () => {
           ),
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Tasks"
         component={TasksScreen}

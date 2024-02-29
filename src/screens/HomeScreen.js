@@ -190,7 +190,7 @@ const HomeScreen = ({ navigation }) => {
                 width: "100%",
                 padding: 35,
                 flexDirection: "row",
-                backgroundColor: "#3a5a40",
+                backgroundColor: "#FF6868",
                 borderRadius: 15,
                 justifyContent: "center",
                 alignItems: "center",

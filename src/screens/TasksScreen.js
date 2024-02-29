@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Image,
   Text,
@@ -8,20 +8,22 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Platform,
+  ImageBackground,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import ContentLoader from "react-native-easy-content-loader";
 import { Divider, FAB } from "react-native-elements";
-import { ScrollView } from "react-native-gesture-handler";
+import { RefreshControl, ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
 import RewardModal from "./modals/RewardModal";
-import Images from "../images/index";
+import UserDetailsModal from "./modals/UserDetailsModal";
+import ImageTextContainer from "../ui/ImageTextContainer";
 
 const TasksScreen = () => {
   const [loading, setLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [user, setUser] = useState({});
+  const [isTaskModalVisible, setIsTaskModalVisible] = useState(false);
   const [image, setImage] = useState(
     "https://img.icons8.com/?size=256&id=53386&format=png"
   );
@@ -30,69 +32,54 @@ const TasksScreen = () => {
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [tasks, setTasks] = useState([]);
-  // const address = getAddressFromCoordinates(location.latitude, location.longitude);
+  const [task, setTask] = useState({});
+  const [refreshing, setRefreshing] = useState(false);
 
   const addTask = async () => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("status", status);
+    formData.append("image", { uri: image, type: "image/jpeg", name: title });
+
     await axios
-      .post(
-        "http://192.168.8.100:3000/api/v1/add_task",
-        {
-          title: title,
-          description: description,
-          status: status,
+      .post("http://192.168.8.100:3000/api/v1/add_task", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      )
+      })
       .then((res) => {
         console.log("data ---> " + res.data);
-        uploadTaskPhoto();
+        setTitle(null);
+        setStatus(null);
+        setDescription(null);
+        setImage(null);
       })
       .catch((err) => {
         console.log("Something went wrong!" + err);
       });
   };
 
-  const uploadTaskPhoto = async () => {
-    const formData = new FormData();
-    formData.append("photo", {
-      uri: image,
-      type: "image/jpeg",
-      name: title,
-    });
-
-    await axios
-    .post("http://192.168.8.100:3000/api/v1/add_task_photos", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-    .then((response) => {
-      console.log(response.data);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-  };
-
+  // const getTasks = () => {
   useEffect(() => {
     axios
-      .get("http://192.168.8.100:3000/api/v1/all_tasks", {
+      .get("http://192.168.8.100:3000/api/v1/all_task", {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
       })
       .then((res) => {
-        setTasks(res.data);
+        setTasks(
+          res.data.sort((a, b) =>
+            a.status.toLowerCase() > b.status.toLowerCase() ? 1 : -1
+          )
+        );
         setLoading(false);
       });
-  }, []);
+  }, [JSON.stringify(tasks)]);
+  // };
 
   const getAddressFromCoordinates = async (latitude, longitude) => {
     const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}`;
@@ -113,14 +100,22 @@ const TasksScreen = () => {
   };
 
   const onModalClose = () => {
-    setUser({});
     setIsModalVisible(false);
     setImage(null);
   };
 
   const openModal = (item) => {
     setIsModalVisible(true);
-    setUser(item);
+  };
+
+  const openTaskModal = (item) => {
+    setIsTaskModalVisible(true);
+    setTask(item);
+  };
+
+  const onTaskModalClose = () => {
+    setTask({});
+    setIsTaskModalVisible(false);
   };
 
   const PickImage = async () => {
@@ -138,6 +133,19 @@ const TasksScreen = () => {
       setImage(result.assets[0].uri);
     }
   };
+
+  const refreshData = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      getTasks;
+      setRefreshing(false);
+    }, 1000);
+  }, []);
+
+  const date = new Date(); // Replace this with your date
+
+  // Format the date without the time
+  const options = { year: "numeric", month: "long", day: "numeric" };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -239,103 +247,149 @@ const TasksScreen = () => {
           </View>
         </View>
       </RewardModal>
-      <View style={{ paddingVertical: 20 }}>
-        <Text
+      <UserDetailsModal
+        onClose={onTaskModalClose}
+        isVisible={isTaskModalVisible}
+      >
+        <View>
+          <View
+            style={{ backgroundColor: "#2b2d42", width: "100%", height: 130 }}
+          ></View>
+          <View
+            style={{
+              flex: 1,
+              paddingHorizontal: 20,
+              marginBottom: 20,
+              marginVertical: -40,
+            }}
+          >
+            <Image
+              source={{ uri: task.image?.url }}
+              style={{
+                height: 200,
+                borderWidth: 5,
+                borderColor: "#fff",
+              }}
+            />
+            <Text
+              selectable={true}
+              style={{ fontSize: 20, marginVertical: 5 }}
+              numberOfLines={1}
+            >
+              {task.title}
+            </Text>
+            <Text>{task.location}</Text>
+            <Text>{task.description}</Text>
+            <Text>{date.toLocaleDateString(task.createdAt, options)}</Text>
+          </View>
+        </View>
+      </UserDetailsModal>
+      <View>
+        <View style={{ paddingVertical: 20 }}>
+          <Text
+            style={{
+              fontSize: 40,
+              fontWeight: "800",
+              marginTop: 0,
+              marginBottom: 0,
+              marginHorizontal: 20,
+            }}
+          >
+            Tasks
+          </Text>
+        </View>
+        <View
           style={{
-            fontSize: 40,
-            fontWeight: "800",
-            marginTop: 0,
-            marginBottom: 0,
-            marginHorizontal: 20,
+            marginHorizontal: 10,
+            borderRadius: 5,
+            marginVertical: 10,
+            flexDirection: "row",
+            padding: 10,
+            justifyContent: "space-between",
           }}
         >
-          Tasks
-        </Text>
-      </View>
-      <View
-        style={{
-          marginHorizontal: 20,
-          //   backgroundColor: "#E5E4E2",
-          borderRadius: 5,
-          marginVertical: 10,
-          flexDirection: "row",
-          padding: 10,
-          justifyContent: "space-between",
-        }}
-      >
-        {loading ? (
-          <View style={{ marginVertical: 20 }}>
-            <ContentLoader
-              active
-              avatar
-              pRows={2}
-              pWidth={["80%", "75%", 45]}
-              listSize={9}
-              animationDuration="1000ms"
-            />
-          </View>
-        ) : (
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={{ marginBottom: 80 }}
-          >
-            <View style={{ flex: 1 }}>
-              <Divider
-                orientation="horizontal"
-                style={{ marginBottom: 20, marginTop: 10 }}
+          {loading ? (
+            <View style={{ marginVertical: 20 }}>
+              <ContentLoader
+                active
+                avatar
+                pRows={2}
+                pWidth={["80%", "75%", 45]}
+                listSize={9}
+                animationDuration="1000ms"
               />
-              {tasks.map((task) => (
-                <TouchableOpacity
-                  key={task.uid}
-                  onPress={() => openModal(task)}
-                >
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      marginHorizontal: 20,
-                    }}
+            </View>
+          ) : (
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              style={{ marginBottom: 80 }}
+              // refreshControl={
+              //   <RefreshControl
+              //     refreshing={refreshing}
+              //     onRefresh={refreshData}
+              //   />
+              // }
+            >
+              <View style={{ flex: 1 }}>
+                <Divider
+                  orientation="horizontal"
+                  style={{ marginBottom: 20, marginTop: 0 }}
+                />
+                {tasks.map((task) => (
+                  <TouchableOpacity
+                    key={task.id}
+                    onPress={() => openTaskModal(task)}
                   >
-                    <Image
-                      source={{
-                        uri: "https://img.icons8.com/?size=256&id=t5LSVwaomF6K&format=png",
+                    <View
+                      style={{
+                        flexDirection: "row",
                       }}
-                      style={{ width: 60, height: 60, borderRadius: 5 }}
-                    />
-                    <View style={{ paddingTop: 4, paddingLeft: 10 }}>
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          paddingVertical: 3,
-                          color: "grey",
-                          paddingLeft: 5,
+                    >
+                      <Image
+                        source={{
+                          uri: task.status.split(" ").includes("Done")
+                            ? "https://img.icons8.com/?size=100&id=vHdHqyap1DU2&format=png&color=40C057"
+                            : task.status.split(" ").includes("In")
+                            ? "https://img.icons8.com/?size=100&id=vHdHqyap1DU2&format=png&color=228BE6"
+                            : "https://img.icons8.com/?size=100&id=vHdHqyap1DU2&format=png&color=FA5252",
                         }}
-                      >
-                        {task.description}
-                      </Text>
-                      <View style={{ flexDirection: "row", paddingLeft: 3 }}>
-                        <Icon name="stars" size={16} color={"grey"} />
+                        style={{ width: 45, height: 45, borderRadius: 5 }}
+                      />
+                      <View style={{ paddingTop: 4, paddingLeft: 10 }}>
                         <Text
                           style={{
+                            fontSize: 14,
+                            paddingVertical: 3,
                             color: "grey",
-                            fontSize: 15,
-                            marginTop: Platform.OS === "android" ? -2.5 : 0,
                             paddingLeft: 5,
                           }}
                         >
-                          {task.status}
+                          {task.title}
                         </Text>
+                        <View style={{ flexDirection: "row", paddingLeft: 3 }}>
+                          <Text
+                            style={{
+                              color: "grey",
+                              fontSize: 15,
+                              marginTop: Platform.OS === "android" ? -2.5 : 0,
+                              paddingLeft: 5,
+                            }}
+                          >
+                            {task.status}
+                          </Text>
+                        </View>
                       </View>
                     </View>
-                  </View>
-                  <Divider
-                    orientation="horizontal"
-                    style={{ marginVertical: 10, marginLeft: 90 }}
-                  />
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
-        )}
+                    <Divider
+                      orientation="horizontal"
+                      style={{ marginVertical: 10, marginLeft: 90 }}
+                    />
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </ScrollView>
+          )}
+        </View>
       </View>
       <FAB
         size={"large"}
