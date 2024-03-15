@@ -56,7 +56,7 @@ const SignUpForm = () => {
   const SignUp = async () => {
     await axios
       .post(
-        "http://192.168.8.100:3000/api/v1/register",
+        "https://framam-server.onrender.com/api/v1/register",
         {
           email: email,
           password: password,
@@ -122,7 +122,7 @@ const SignUpForm = () => {
       });
 
     await axios
-      .post("http://192.168.8.100:3000/api/v1/add_photo", formData, {
+      .post("https://framam-server.onrender.com/api/v1/add_photo", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Access-Control-Allow-Origin": "*",

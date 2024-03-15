@@ -21,22 +21,25 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/f7527440-a573-4623-a662-b7b113363ebc"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "config": {
-        "googleMapsApiKey": ""
-      }
+      "bundleIdentifier": "com.mustapha100.framammobile"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.mustapha100.framammobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -50,6 +53,9 @@
         "projectId": "f7527440-a573-4623-a662-b7b113363ebc"
       }
     },
-    "owner": "mustapha100"
+    "owner": "mustapha100",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   }
 }

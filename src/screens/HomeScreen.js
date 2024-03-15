@@ -3,13 +3,10 @@ import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 import {
   Image,
-  Platform,
   RefreshControl,
   SafeAreaView,
   ScrollView,
   Text,
-  TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { Divider, FAB } from "react-native-elements";
@@ -39,12 +36,15 @@ const HomeScreen = ({ navigation }) => {
   const redeemPoints = async () => {
     await AsyncStorage.getItem("userId").then((uid) => {
       axios
-        .put(`http://192.168.8.100:3000/api/v1/get_reward/${uid}/${token}`, {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
+        .put(
+          `https://framam-server.onrender.com/api/v1/get_reward/${uid}/${token}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+          }
+        )
         .then((response) => {
           console.log(response.data);
           setCongrats(response.data);
@@ -59,7 +59,7 @@ const HomeScreen = ({ navigation }) => {
   const getUser = () => {
     AsyncStorage.getItem("userId").then((uid) => {
       axios
-        .get(`http://192.168.8.100:3000/api/v1/user/${uid}`, {
+        .get(`https://framam-server.onrender.com/api/v1/user/${uid}`, {
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
@@ -96,12 +96,12 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   const pointsConversion = (points) => {
-      return  points >= 1000 ? points / 1000 + "k" : points;
-  }
+    return points >= 1000 ? points / 1000 + "k" : points;
+  };
 
   const recyclesConversion = (recycles) => {
-    return  recycles >= 1000 ? recycles / 1000 + "k" : recycles;
-}
+    return recycles >= 1000 ? recycles / 1000 + "k" : recycles;
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, paddingVertical: 20 }}>
@@ -190,7 +190,7 @@ const HomeScreen = ({ navigation }) => {
                 width: "100%",
                 padding: 35,
                 flexDirection: "row",
-                backgroundColor: "#FF6868",
+                backgroundColor: "#588157",
                 borderRadius: 15,
                 justifyContent: "center",
                 alignItems: "center",

@@ -1,14 +1,14 @@
 {
     "expo": {
-      "name": "YourAppName",
-      "slug": "your-app-slug",
+      "name": "Framam",
+      "slug": "framam",
       "version": "1.0.0",
       "orientation": "portrait",
-      "icon": "./path/to/your/app-icon.png",
+      "icon": "./assets/icon.png",
       "splash": {
-        "image": "./path/to/your/splash.png",
+        "image": "./assets/splash.png",
         "resizeMode": "contain",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#000000"
       },
       "updates": {
         "fallbackToCacheTimeout": 0

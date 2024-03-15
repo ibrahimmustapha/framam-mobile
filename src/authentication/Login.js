@@ -43,7 +43,7 @@ const Login = ({ navigation }) => {
   const SignIn = async () => {
     await axios
       .post(
-        "http://192.168.8.100:3000/api/v1/login",
+        "https://framam-server.onrender.com/api/v1/login",
         {
           email,
           password,

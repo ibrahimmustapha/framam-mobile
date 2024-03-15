@@ -10,7 +10,7 @@ const MostPointsScreen = () => {
   // get user with most points
   useEffect(() => {
     axios
-      .get("http://192.168.8.100:3000/api/v1/most-points", {
+      .get("https://framam-server.onrender.com/api/v1/most-points", {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",

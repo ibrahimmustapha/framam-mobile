@@ -10,6 +10,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import TasksScreen from "../screens/TasksScreen";
 import { Text } from "react-native";
+import MessageScreen from "../screens/MessageScreen";
+import HelpScreen from "../screens/HelpScreen";
+import TaskHomeScreen from "../screens/TaskHomeScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +40,7 @@ const BottomTabNavigation = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={TaskHomeScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
@@ -49,24 +52,24 @@ const BottomTabNavigation = () => {
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}
       />
-      {/* <Tab.Screen
-        name="Directions"
-        component={DirectionScreen}
+      <Tab.Screen
+        name="Help"
+        component={HelpScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ focused, color, size }) => (
             <MaterialCommunityIcons
-              name="compass-outline"
+              name="help-circle-outline"
               color={focused ? "#BF4F51" : "grey"}
               size={30}
             />
           ),
           tabBarLabel: ({ focused, color, size }) => (
-            <Text style={{color: focused ? '#BF4F51' : color}}>Directions</Text>
+            <Text style={{color: focused ? '#BF4F51' : color}}>Help</Text>
           ),
           tabBarLabelStyle: { fontSize: 13, color: "grey" },
         }}
-      /> */}
+      />
       <Tab.Screen
         name="Tasks"
         component={TasksScreen}

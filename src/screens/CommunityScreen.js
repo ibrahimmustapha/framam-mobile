@@ -26,7 +26,7 @@ const CommunityScreen = () => {
 
   useEffect(() => {
     axios
-      .get("http://192.168.8.100:3000/api/v1/users", {
+      .get("https://framam-server.onrender.com/api/v1/users", {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",

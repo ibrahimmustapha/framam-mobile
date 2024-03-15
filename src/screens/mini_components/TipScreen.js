@@ -16,7 +16,7 @@ const TipScreen = () => {
 
   useEffect(() => {
     axios
-      .get(`http://192.168.8.100:3000/api/v1/first-four-tips`, {
+      .get(`https://framam-server.onrender.com/api/v1/first-four-tips`, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",

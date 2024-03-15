@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const RewardModal = ({ isVisible, onClose, children }) => {
+const RewardModal = ({ isVisible, onClose, children, title }) => {
   return (
     <Modal animationType="slide" transparent={true} visible={isVisible}>
       <BlurView
@@ -22,7 +22,7 @@ const RewardModal = ({ isVisible, onClose, children }) => {
             <View>
               <View style={styles.iconStyle}>
                 <Text style={{ fontSize: 18, fontWeight: "700" }}>
-                  🎉Add Task Here
+                  {title}
                 </Text>
                 <TouchableOpacity onPress={onClose}>
                   <Icon name="close" color="#000" size={27} />

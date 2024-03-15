@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   walkthroughImage: {
     height: 450,
     overflow: "hidden",
-    borderBottomRightRadius: 50,
+    borderBottomRightRadius: 50
   },
   titleStyle: {
     fontSize: 30,

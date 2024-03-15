@@ -26,7 +26,7 @@ const ProfileScreen = ({ navigation }) => {
   const getUser = async () => {
     await AsyncStorage.getItem("userId").then((uid) => {
       axios
-        .get(`http://192.168.8.100:3000/api/v1/user/${uid}`, {
+        .get(`https://framam-server.onrender.com/api/v1/user/${uid}`, {
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
@@ -57,7 +57,7 @@ const ProfileScreen = ({ navigation }) => {
 
   const Logout = async () => {
     await axios
-      .get(`http://192.168.8.100:3000/api/v1/logout`, {
+      .get(`https://framam-server.onrender.com/api/v1/logout`, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
@@ -156,7 +156,7 @@ const ProfileScreen = ({ navigation }) => {
                 data={`${user.dob?.day} / ${user.dob?.month} / ${user.dob?.year}`}
                 icon={"cake"}
               />
-              <ImageTextContainer data={`${user.points} points`} icon={"stars"} />
+              {/* <ImageTextContainer data={`${user.points} points`} icon={"stars"} /> */}
               <ImageTextContainer
                 data={user.bio?.address}
                 icon={"location-on"}
