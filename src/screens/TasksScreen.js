@@ -20,6 +20,7 @@ import UserDetailsModal from "./modals/UserDetailsModal";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TasksScreen = () => {
   const [loading, setLoading] = useState(true);
@@ -35,18 +36,24 @@ const TasksScreen = () => {
   const [task, setTask] = useState({});
   const [dueDate, setDueDate] = useState(null);
   const [startDate, setStartDate] = useState(null);
+  const [createdBy, setCreatedBy] = useState(null);
 
   const addTask = async () => {
+    await AsyncStorage.getItem("username").then((username) => {
+      setCreatedBy(username);
+    });
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
     formData.append("status", status);
     formData.append("startDate", startDate);
     formData.append("dueDate", dueDate);
+    formData.append("createdBy", createdBy);
     formData.append("image", { uri: image, type: "image/jpeg", name: title });
 
     await axios
-      .post("https://framam-server.onrender.com/api/v1/add_task", formData, {
+      .post("http://192.168.8.100:3000/api/v1/add_task", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           "Access-Control-Allow-Origin": "*",

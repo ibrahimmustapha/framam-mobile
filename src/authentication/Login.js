@@ -40,6 +40,15 @@ const Login = ({ navigation }) => {
     }
   };
 
+  const setUserName = async (username) => {
+    try {
+      await AsyncStorage.setItem("username", username);
+      console.log("Data saved successfully - username");
+    } catch (error) {
+      console.log("Error saving data:", error);
+    }
+  };
+
   const SignIn = async () => {
     await axios
       .post(
@@ -59,6 +68,7 @@ const Login = ({ navigation }) => {
         setLoading(true);
         setIdToken(res.data.idToken);
         setUid(res.data.userId);
+        setUserName(res.data.username)
         console.log("data ---> " + res.data);
         setTimeout(() => setUser(res.data.idToken), 3000);
       })
